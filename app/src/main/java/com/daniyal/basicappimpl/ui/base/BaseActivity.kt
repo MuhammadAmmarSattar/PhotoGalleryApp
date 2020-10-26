@@ -1,11 +1,9 @@
-package com.daniyal.basicappimpl.baseabstraction
+package com.daniyal.basicappimpl.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.squareup.otto.Bus
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -18,7 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         applicationEntry = application as ApplicationEntry
-        bus = applicationEntry.bus
+        applicationEntry.let { bus=it.bus }
         bus.register(this)
         isBusRegistered = true
 

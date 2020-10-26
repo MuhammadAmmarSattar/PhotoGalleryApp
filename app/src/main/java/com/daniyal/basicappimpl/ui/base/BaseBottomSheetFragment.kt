@@ -1,4 +1,4 @@
-package com.daniyal.basicappimpl.baseabstraction
+package com.daniyal.basicappimpl.ui.base
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

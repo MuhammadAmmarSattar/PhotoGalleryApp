@@ -6,12 +6,5 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class ApplicationEntry : Application() {
-    lateinit var bus: Bus
-
-    init {
-        bus=Bus()
-    }
-
-
-
+    var bus: Bus = Bus()
 }

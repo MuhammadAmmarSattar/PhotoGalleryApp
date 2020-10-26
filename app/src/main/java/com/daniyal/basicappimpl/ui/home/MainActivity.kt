@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.bumptech.glide.RequestManager
 import com.daniyal.basicappimpl.R
-import com.daniyal.basicappimpl.baseabstraction.BaseActivity
+import com.daniyal.basicappimpl.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -18,8 +18,6 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var retrofit: Retrofit
 
-    @Inject
-    lateinit var toast: Toast
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

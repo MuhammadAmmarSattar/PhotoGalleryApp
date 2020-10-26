@@ -36,13 +36,7 @@ object AppModule {
     @Provides
     fun provideApplicationInstance() = ApplicationEntry()
 
-    @Singleton
-    @Provides
 
-    fun provideToast(@ApplicationContext context: Context): Toast {
-        val message = "Welcome"
-        return Toast.makeText(context, message, Toast.LENGTH_SHORT)
-    }
 
 
 }
