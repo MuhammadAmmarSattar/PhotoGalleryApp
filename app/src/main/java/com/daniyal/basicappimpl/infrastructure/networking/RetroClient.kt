@@ -10,6 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+
+//Class Has No More Need
 object RetroClient {
     private lateinit var interceptor: HttpLoggingInterceptor
     private lateinit var okHttpClient: OkHttpClient

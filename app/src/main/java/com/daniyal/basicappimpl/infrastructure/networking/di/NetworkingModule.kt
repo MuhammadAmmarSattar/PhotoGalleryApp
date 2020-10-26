@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -23,6 +24,7 @@ object NetworkingModule {
     //Network Providers
     @Provides
     fun provideBaseUrl() = AppConfigUtils.BASE_URL
+
     @Provides
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
@@ -31,15 +33,20 @@ object NetworkingModule {
     fun provideOkHttpClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor()
         logger.level = HttpLoggingInterceptor.Level.BODY
-        return   OkHttpClient.Builder()
+        return OkHttpClient.Builder()
             .addInterceptor(logger)
-            .connectionSpecs(Arrays.asList(ConnectionSpec.MODERN_TLS, ConnectionSpec.COMPATIBLE_TLS))
+            .connectionSpecs(
+                Arrays.asList(
+                    ConnectionSpec.MODERN_TLS,
+                    ConnectionSpec.COMPATIBLE_TLS
+                )
+            )
             .followRedirects(true)
             .followSslRedirects(true)
             .retryOnConnectionFailure(true)
-            .connectTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
-            .readTimeout(20,  java.util.concurrent.TimeUnit.SECONDS)
-            .writeTimeout(20, java.util.concurrent.TimeUnit.SECONDS)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
             .cache(null)
             .build()
 
@@ -57,7 +64,6 @@ object NetworkingModule {
 //                .readTimeout(100, java.util.concurrent.TimeUnit.SECONDS)
 //                .connectTimeout(100, TimeUnit.SECONDS)
 //                .build()
-
 
 
     @Provides

@@ -1,4 +1,4 @@
-package com.daniyal.basicappimpl.ui
+package com.daniyal.basicappimpl.ui.home
 
 import android.os.Bundle
 import android.widget.Toast
