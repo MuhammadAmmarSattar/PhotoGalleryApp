@@ -15,9 +15,6 @@ class MainActivity : BaseActivity() {
     @Inject
     lateinit var glide: RequestManager
 
-    @Inject
-    lateinit var retrofit: Retrofit
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
