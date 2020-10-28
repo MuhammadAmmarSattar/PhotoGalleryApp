@@ -21,20 +21,20 @@ class DataStoreManager @Inject constructor(context: Context) {
     }
 
     suspend fun <T> setData(key: Preferences.Key<T>, data: T) {
-        dataStore.edit {
-            it[key] = data
+        dataStore.edit {preference->
+            preference[key] = data
         }
     }
 
     suspend fun <T> getData(key: Preferences.Key<T>): T? {
-        return dataStore.data.map {
-            it[key]
+        return dataStore.data.map {preferences->
+            preferences[key]
         }.firstOrNull()
     }
 
     suspend fun <T> getData(key: Preferences.Key<T>, defaultValue: T): T {
-        return when (val x = dataStore.data.map {
-            it[key]
+        return when (val x = dataStore.data.map {preferences->
+            preferences[key]
         }.firstOrNull()) {
             null -> defaultValue
             else -> x

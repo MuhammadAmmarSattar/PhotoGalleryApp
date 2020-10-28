@@ -9,6 +9,7 @@ import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import timber.log.Timber
 import javax.inject.Inject
@@ -33,7 +34,8 @@ class EncryptionInterceptor @Inject constructor(val securityManager: SecurityMan
                 e.printStackTrace()
             }
 
-            val body: RequestBody = RequestBody.create(mediaType, encryptedBody)
+//            val body: RequestBody = RequestBody.create(mediaType, encryptedBody)
+            val body:RequestBody=encryptedBody.toRequestBody(mediaType)
 
             //build new request
             request = request.newBuilder()
