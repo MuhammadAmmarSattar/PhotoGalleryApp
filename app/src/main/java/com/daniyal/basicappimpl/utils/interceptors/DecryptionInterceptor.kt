@@ -10,6 +10,7 @@ import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
 import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,7 +28,8 @@ class DecryptionInterceptor @Inject constructor(val securityManager: SecurityMan
                 val newResponse = response.newBuilder()
                 var contentType = response.header("Content-Type")
                 if (TextUtils.isEmpty(contentType)) contentType = "application/json"
-                var responseString = response.body!!.string()
+                val responseString = response.body!!.string()
+//                var responseString = response.body!!.string()
                 // fixed encrypted response for testing
 //                responseString = "qhILOoGd77qYgfeUCW0H+oJaH6eXAsM7fQY9b6fEMwgBqywrYS5iTtetB0HKP5Wp"
                 var decryptedString: String? = null
@@ -37,8 +39,11 @@ class DecryptionInterceptor @Inject constructor(val securityManager: SecurityMan
                     e.printStackTrace()
                 }
                 val mediaType: MediaType = contentType.toString().toMediaTypeOrNull()!!
+
                 Timber.e("Decrypted Response Body %s", decryptedString)
-                newResponse.body(ResponseBody.create(mediaType, decryptedString!!))
+
+                newResponse.body(decryptedString?.toResponseBody(mediaType))
+//                        ResponseBody.create(mediaType, decryptedString!!))
                 return newResponse.build()
             }
             return response

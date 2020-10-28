@@ -3,13 +3,12 @@ package com.example.basearchitecture.common.Utils
 import android.os.Build
 import androidx.annotation.RequiresApi
 import java.util.*
-import javax.crypto.*
+import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+//@Singleton
 class SecurityManager @Inject constructor() {
     //AES only supports key sizes of 16, 24 or 32 bytes
     private val KEY: String = "ABC1234567890ABC"
