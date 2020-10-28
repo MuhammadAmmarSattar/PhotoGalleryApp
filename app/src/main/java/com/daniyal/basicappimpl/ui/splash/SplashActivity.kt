@@ -2,6 +2,7 @@ package com.daniyal.basicappimpl.ui.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.daniyal.basicappimpl.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
