@@ -1,6 +1,9 @@
 package com.daniyal.basicappimpl.di
 
 import com.daniyal.basicappimpl.utils.AppConfigUtils
+import com.example.basearchitecture.common.Utils.SecurityManager
+import com.example.basearchitecture.common.Utils.SessionManager
+import com.example.basearchitecture.common.Utils.interceptors.HeaderInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -27,6 +30,19 @@ object NetworkingModule {
 
     @Provides
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
+
+    @Provides
+    @Singleton
+    fun provideSessionManager() = SessionManager()
+
+    @Provides
+    @Singleton
+    fun provideSecurityManager()= SecurityManager()
+
+
+    @Provides
+    @Singleton
+    fun provideHeaderIntercepter(sessionManager:SessionManager) = HeaderInterceptor(sessionManager)
 
     @Provides
     @Singleton

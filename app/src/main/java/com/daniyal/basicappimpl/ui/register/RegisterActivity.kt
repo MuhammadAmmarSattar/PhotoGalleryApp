@@ -1,7 +1,7 @@
 package com.daniyal.basicappimpl.ui.register
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.daniyal.basicappimpl.R
 
 class RegisterActivity : AppCompatActivity() {

@@ -16,7 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         applicationEntry = application as ApplicationEntry
-        applicationEntry.let { bus=it.bus }
+        bus = applicationEntry.bus
         bus.register(this)
         isBusRegistered = true
 
