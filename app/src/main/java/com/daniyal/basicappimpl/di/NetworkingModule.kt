@@ -33,19 +33,6 @@ object NetworkingModule {
 
     @Provides
     @Singleton
-    fun provideSessionManager() = SessionManager()
-
-    @Provides
-    @Singleton
-    fun provideSecurityManager()= SecurityManager()
-
-
-    @Provides
-    @Singleton
-    fun provideHeaderIntercepter(sessionManager:SessionManager) = HeaderInterceptor(sessionManager)
-
-    @Provides
-    @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor()
         logger.level = HttpLoggingInterceptor.Level.BODY
