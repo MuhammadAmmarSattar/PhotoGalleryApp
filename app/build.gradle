@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 //apply plugin: 'com.google.gms.google-services'
 apply plugin: 'dagger.hilt.android.plugin'
-
+def config = rootProject.extensions.getByName("ext")
 
 
 android {
@@ -47,94 +47,63 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    implementation "androidx.viewpager2:viewpager2:1.0.0"
-
-
+    implementation config.commonDependency.ktx_core
+    implementation config.commonDependency.multidex
+    implementation config.commonDependency.appcompat
     //Databinding Compiler
-    kapt 'com.android.databinding:compiler:3.1.4'
-
+    kapt config.commonDependency.dataBinding
     //RetroFit Networking
-    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1';
+    implementation config.retrofitDependency.retrofit2
+    implementation config.retrofitDependency.loggingInterceptor
+    implementation config.retrofitDependency.retrofitGsonConvertor
+    implementation config.retrofitDependency.retrofit2AdatperRxJava
 
-
-
-
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
-    // Material Design
-    implementation 'com.google.android.material:material:1.2.1'
-
-    // Architectural Components
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-
-    // Room
-    implementation "androidx.room:room-runtime:2.2.5"
-    kapt "androidx.room:room-compiler:2.2.5"
-
-    // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-
-    // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0-M1'
-
-
-    // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-
-    // Navigation Component
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.1"
-
-    // Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
-
-    // Activity KTX for viewModels()
-    implementation "androidx.activity:activity-ktx:1.1.0"
-
-    //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.28-alpha"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"
-    kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"
-    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
-    // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
-
-//    // Firebase Firestore
-//    implementation 'com.google.firebase:firebase-firestore:21.7.2'
-//
-//    // Firebase Storage KTX
-//    implementation 'com.google.firebase:firebase-storage-ktx:19.2.0'
-//
-//    // Firebase Coroutines
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
-
-    //DataStore Preferences
-    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
-
-    //For Event Management
-    api 'com.squareup:otto:1.3.8'
-
+    implementation config.commonDependency.gson
+    implementation config.retrofitDependency.okhttp
+    // rx java
+    implementation config.reactive_extension.rxJava2
+    // testing
+    implementation config.testing.junit
+    implementation config.testing.junitExtension
+    implementation config.testing.espresso
+    implementation  config.testing.mockito
+    testImplementation config.testing.mockitoTestImplementation
+    androidTestImplementation config.testing.mockitoAndroidTestImplementation
+    // material design
+    implementation config.ui_design.materialDesign
     //Complex RecyclerViews
-    implementation "com.xwray:groupie:2.7.0"
-
-
-
+    implementation config.ui_design.complexRv
+    //viewPager_2
+    implementation config.ui_design.viewPager2
+    //ConstraintLayout
+    implementation config.ui_design.constraintLayout
+    // room
+    implementation config.database.room
+    implementation config.database.roomAnnotation
+    // Android Architecture Component.
+    implementation config.androidArchitectureComponents.lifeCycleExtension
+    implementation config.androidArchitectureComponents.lifeCycleLiveData
+    implementation config.androidArchitectureComponents.lifeCycleRuntime
+    implementation config.androidArchitectureComponents.lifecyleViewModel
+    // Coroutines
+    implementation config.commonDependency.coroutines
+    // Navigation Component
+    implementation config.navigationDependency.navFragment
+    implementation config.navigationDependency.navKtx
+    // Glide
+    implementation config.image_processing.glide
+    kapt config.image_processing.glideCompiler
+    // Activity KTX for viewModels()
+    implementation config.commonDependency.activityKtx
+    //Dagger - Hilt
+    implementation config.di.hilt
+    implementation config.di.hiltLifeCycleVM
+    kapt config.di.hiltCompiler
+    kapt config.di.hiltDagger
+    // Timber
+    implementation config.logs.timber
+    //DataStore Preferences
+    implementation config.commonDependency.dataStorePref
+    //For Event Management
+    api config.commonDependency.otto
 }

@@ -3,6 +3,7 @@ package com.daniyal.basicappimpl.ui.home
 import android.os.Bundle
 import com.bumptech.glide.RequestManager
 import com.daniyal.basicappimpl.R
+import com.daniyal.basicappimpl.di.AppModule.provideGlideInstance
 import com.daniyal.basicappimpl.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
