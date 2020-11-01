@@ -16,6 +16,5 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context) =
-        ApplicationDatabase.getInstance(context)
+    fun provideAppDatabase(@ApplicationContext context: Context) =ApplicationDatabase.getInstance(context)
 }
