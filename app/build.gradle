@@ -42,6 +42,22 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    flavorDimensions "server"
+    productFlavors {
+        stag {
+            dimension "server"
+            versionNameSuffix "-stag"
+        }
+        prod {
+            dimension "server"
+            versionNameSuffix "-prd"
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {

@@ -1,9 +1,6 @@
 package com.daniyal.basicappimpl.di
-
+import com.daniyal.basicappimpl.AppConstants
 import com.daniyal.basicappimpl.utils.AppConfigUtils
-import com.example.basearchitecture.common.Utils.SecurityManager
-import com.example.basearchitecture.common.Utils.SessionManager
-import com.example.basearchitecture.common.Utils.interceptors.HeaderInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -73,10 +70,9 @@ object NetworkingModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(AppConfigUtils.BASE_URL)
+            .baseUrl(AppConstants.BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
 }
