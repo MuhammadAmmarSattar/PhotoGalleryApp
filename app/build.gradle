@@ -66,6 +66,7 @@ dependencies {
     implementation config.commonDependency.ktx_core
     implementation config.commonDependency.multidex
     implementation config.commonDependency.appcompat
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //Databinding Compiler
     kapt config.commonDependency.dataBinding
     //RetroFit Networking

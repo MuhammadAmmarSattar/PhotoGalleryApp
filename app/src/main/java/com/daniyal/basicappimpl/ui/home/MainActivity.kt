@@ -18,7 +18,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        glide.load(R.mipmap.ic_launcher).into(image)
+//        glide.load(R.mipmap.ic_launcher).into(image)
 
     }
 }
