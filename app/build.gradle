@@ -12,7 +12,6 @@ android {
     buildToolsVersion "30.0.2"
 
 
-
     defaultConfig {
         applicationId "com.daniyal.basicappimpl"
         minSdkVersion 16
@@ -54,10 +53,11 @@ android {
             versionNameSuffix "-prd"
         }
     }
+    buildFeatures {
+        dataBinding = true
 
-    dataBinding {
-        enabled = true
     }
+
 }
 
 dependencies {
@@ -83,7 +83,7 @@ dependencies {
     implementation config.testing.junit
     implementation config.testing.junitExtension
     implementation config.testing.espresso
-    implementation  config.testing.mockito
+    implementation config.testing.mockito
     testImplementation config.testing.mockitoTestImplementation
     androidTestImplementation config.testing.mockitoAndroidTestImplementation
     // material design
