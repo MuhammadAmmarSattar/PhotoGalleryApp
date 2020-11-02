@@ -29,6 +29,7 @@ task clean(type: Delete) {
 
 ext {
     retrofit2 = "2.7.0"
+    lottieVersion="3.4.1"
     loggingInterceptor = "4.2.2"
     retrofitGsonConvertor = "2.7.0"
     gson = "2.8.6"
@@ -123,7 +124,8 @@ ext {
             materialDesign  : "com.google.android.material:material:${materialDesign}",
             complexRv       : "com.xwray:groupie:${complexRv}",
             viewPager2      : "androidx.viewpager2:viewpager2:${viewPager2}",
-            constraintLayout: "androidx.constraintlayout:constraintlayout:${constraintlayout}"
+            constraintLayout: "androidx.constraintlayout:constraintlayout:${constraintlayout}",
+            lottieViews     : "com.airbnb.android:lottie:${lottieVersion}"
     ]
 
 }

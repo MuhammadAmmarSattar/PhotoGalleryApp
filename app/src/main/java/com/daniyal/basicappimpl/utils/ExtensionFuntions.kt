@@ -1,4 +1,4 @@
-package com.example.basearchitecture.common.Utils
+package com.daniyal.basicappimpl.utils
 
 import okhttp3.RequestBody
 import okio.Buffer
@@ -14,3 +14,6 @@ fun requestBodyToString(request: RequestBody?): String? {
     }
 
 }
+
+
+
