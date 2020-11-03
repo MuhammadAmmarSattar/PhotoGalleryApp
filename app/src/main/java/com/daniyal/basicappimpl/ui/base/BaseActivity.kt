@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.daniyal.basicappimpl.utils.LocaleContainer
+import com.daniyal.basicappimpl.utils.ProgressDialog
 import com.squareup.otto.Bus
 
 
@@ -14,6 +15,8 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var applicationEntry: ApplicationEntry
     protected lateinit var bus: Bus
     protected var isBusRegistered: Boolean = false
+    protected var customProgressDialog: ProgressDialog? = null
+
 
     var _localeContainer: MutableLiveData<LocaleContainer> = MutableLiveData()
     private var localeContainer: LiveData<LocaleContainer> = _localeContainer
@@ -26,6 +29,7 @@ abstract class BaseActivity : AppCompatActivity() {
         bus.register(this)
         isBusRegistered = true
         subscribeToObserver()
+        customProgressDialog = ProgressDialog(this)
         _localeContainer.postValue(LocaleContainer.ENGLISH)
     }
 

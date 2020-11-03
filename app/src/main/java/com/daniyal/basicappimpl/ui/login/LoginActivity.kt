@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.ui.base.BaseActivity
 import com.daniyal.basicappimpl.ui.home.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
