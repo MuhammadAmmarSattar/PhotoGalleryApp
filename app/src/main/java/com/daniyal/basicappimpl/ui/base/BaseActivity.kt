@@ -58,6 +58,10 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
+        if (customProgressDialog!=null){
+            customProgressDialog=null
+        }
+
         if (isBusRegistered) {
             bus.unregister(this)
             isBusRegistered = false
@@ -67,7 +71,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-
+        if (customProgressDialog!=null){
+            customProgressDialog=null
+        }
         if (isBusRegistered) {
             bus.unregister(this)
             isBusRegistered = false
