@@ -1,6 +1,8 @@
 package com.daniyal.basicappimpl.ui.base
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
@@ -10,13 +12,17 @@ import com.squareup.otto.Bus
 abstract class BaseDialogFragment : DialogFragment() {
     protected lateinit var application: ApplicationEntry
     protected lateinit var bus: Bus
-
-
+    protected lateinit var activity: Activity
     protected var isBusRegistered: Boolean = false
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = (context as Activity)
+    }
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        application = activity?.application as ApplicationEntry
+        application = activity.application as ApplicationEntry
         bus = application.bus
         bus.register(this)
         isBusRegistered = true

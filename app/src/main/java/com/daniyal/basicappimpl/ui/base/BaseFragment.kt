@@ -12,16 +12,16 @@ import androidx.fragment.app.Fragment
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.squareup.otto.Bus
 
- abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment()    {
+abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
 
     protected lateinit var application: ApplicationEntry
     protected var isBusRegistered: Boolean = false
     protected lateinit var bus: Bus
     protected lateinit var activity: Activity
 
-        // data binding
-     private lateinit var dataBinding: DataBinding
-     protected val binding get() = dataBinding
+    // data binding
+    private lateinit var dataBinding: DataBinding
+    protected val binding get() = dataBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,26 +37,28 @@ import com.squareup.otto.Bus
 
 
     }
-     override fun onCreateView(
-         inflater: LayoutInflater,
-         container: ViewGroup?,
-         savedInstanceState: Bundle?
-     ): View? {
-         // View is created using layout Id
-         dataBinding = DataBindingUtil.inflate(inflater, getFragmentLayout(), container, false)
-         return dataBinding.root
-     }
 
-     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-         super.onViewCreated(view, savedInstanceState)
-         //ViewModel is set as Binding Variable
-         dataBinding.apply {
-             lifecycleOwner = viewLifecycleOwner
-         }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // View is created using layout Id
+        dataBinding = DataBindingUtil.inflate(inflater, getFragmentLayout(), container, false)
+        return dataBinding.root
+    }
 
-     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-     protected abstract fun getFragmentLayout(): Int
+        //ViewModel is set as Binding Variable
+        dataBinding.apply {
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+    }
+
+    protected abstract fun getFragmentLayout(): Int
     override fun onDestroy() {
         super.onDestroy()
         if (isBusRegistered) {

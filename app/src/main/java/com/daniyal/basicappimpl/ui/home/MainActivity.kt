@@ -1,24 +1,25 @@
 package com.daniyal.basicappimpl.ui.home
 
 import android.os.Bundle
+import android.os.Handler
 import com.bumptech.glide.RequestManager
 import com.daniyal.basicappimpl.R
-import com.daniyal.basicappimpl.di.AppModule.provideGlideInstance
-import com.daniyal.basicappimpl.ui.base.BaseActivity
+import com.daniyal.basicappimpl.ui.base.BaseAuthenticationActivity
+import com.daniyal.basicappimpl.utils.LocaleContainer
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : BaseAuthenticationActivity() {
 
     @Inject
     lateinit var glide: RequestManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun baseOnCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
-//        glide.load(R.mipmap.ic_launcher).into(image)
+        _localeContainer.postValue(LocaleContainer.ARABIC)
 
     }
+
+
 }
