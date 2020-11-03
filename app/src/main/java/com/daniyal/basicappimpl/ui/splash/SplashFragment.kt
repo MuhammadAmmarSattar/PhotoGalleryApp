@@ -10,10 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.databinding.FragmentSplashBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
 

@@ -26,7 +26,6 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
 ext {
     retrofit2 = "2.7.0"
     loggingInterceptor = "4.2.2"
@@ -125,5 +124,4 @@ ext {
             viewPager2      : "androidx.viewpager2:viewpager2:${viewPager2}",
             constraintLayout: "androidx.constraintlayout:constraintlayout:${constraintlayout}"
     ]
-
 }
