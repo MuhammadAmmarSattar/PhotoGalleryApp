@@ -1,6 +1,10 @@
 package com.daniyal.basicappimpl.di
+
 import com.daniyal.basicappimpl.AppConstants
-import com.daniyal.basicappimpl.utils.AppConfigUtils
+import com.daniyal.basicappimpl.BuildConfig
+import com.example.basearchitecture.common.Utils.interceptors.DecryptionInterceptor
+import com.example.basearchitecture.common.Utils.interceptors.EncryptionInterceptor
+import com.example.basearchitecture.common.Utils.interceptors.HeaderInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -20,21 +24,27 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-object NetworkingModule {
+object RetrofitModule {
     //Network Providers
     @Provides
-    fun provideBaseUrl() = AppConfigUtils.BASE_URL
+    fun provideBaseUrl() = BuildConfig.BASE_URL
 
     @Provides
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.BODY
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        headerInterceptor: HeaderInterceptor,
+        encryptionInterceptor: EncryptionInterceptor,
+        decryptionInterceptor: DecryptionInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(logger)
+            .addInterceptor(headerInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(encryptionInterceptor)
+            .addInterceptor(decryptionInterceptor)
             .connectionSpecs(
                 Arrays.asList(
                     ConnectionSpec.MODERN_TLS,
@@ -65,6 +75,12 @@ object NetworkingModule {
 //                .connectTimeout(100, TimeUnit.SECONDS)
 //                .build()
 
+
+    @Provides
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     @Provides
     @Singleton

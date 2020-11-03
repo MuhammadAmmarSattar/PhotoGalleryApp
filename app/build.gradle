@@ -22,8 +22,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("Boolean", "IS_ENCRYPTION_ENABLED", "true")
+        buildConfigField("Boolean", "IS_ENCRYPTION_ENABLED", "false")
         buildConfigField("String", "DATA_STORE_NAME", "\"my_app_data_store\"")
+        buildConfigField("String", "DB_NAME", "\"my_room_db\"")
+        buildConfigField("String", "BASE_URL", "\"https://8bc1dd86-134b-4cba-8faf-1913c2adec08.mock.pstmn.io\"")
 
     }
 
@@ -96,11 +98,13 @@ dependencies {
     implementation config.ui_design.constraintLayout
     // room
     implementation config.database.room
-    implementation config.database.roomAnnotation
+    kapt config.database.roomAnnotation
+    implementation config.database.roomCoroutines
     // Android Architecture Component.
     implementation config.androidArchitectureComponents.lifeCycleExtension
     implementation config.androidArchitectureComponents.lifeCycleLiveData
     implementation config.androidArchitectureComponents.lifeCycleRuntime
+    implementation config.androidArchitectureComponents.lifeCycleRuntimeKtx
     implementation config.androidArchitectureComponents.lifecyleViewModel
     // Coroutines
     implementation config.commonDependency.coroutines

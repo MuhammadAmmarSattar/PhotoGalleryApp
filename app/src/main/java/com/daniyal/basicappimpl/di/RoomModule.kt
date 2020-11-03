@@ -1,7 +1,9 @@
 package com.daniyal.basicappimpl.di
 
 import android.content.Context
-import com.daniyal.basicappimpl.data.local.ApplicationDatabase
+import androidx.room.Room
+import com.daniyal.basicappimpl.BuildConfig
+import com.daniyal.basicappimpl.data.repository.ApplicationDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +18,10 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context) =ApplicationDatabase.getInstance(context)
+    fun provideRoomDb(@ApplicationContext context: Context): ApplicationDatabase =
+        Room.databaseBuilder(
+            context,
+            ApplicationDatabase::class.java, BuildConfig.DB_NAME
+        ).build()
+
 }

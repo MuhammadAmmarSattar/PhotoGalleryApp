@@ -27,13 +27,13 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 ext {
-    retrofit2 = "2.7.0"
+    retrofit2 = "2.9.0"
     lottieVersion="3.4.1"
     loggingInterceptor = "4.2.2"
     retrofitGsonConvertor = "2.7.0"
     gson = "2.8.6"
     okhttp = "4.2.2"
-    retrofit2AdatperRxJava = "2.7.0"
+    retrofit2AdatperRxJava = "2.9.0"
     rxJava2 = "2.1.1"
     junit = "4.12"
     junitExtension = "1.1.2"
@@ -41,7 +41,6 @@ ext {
     materialDesign = "1.2.1"
     lifecyleViewModel = "2.2.0"
     room = "2.2.5"
-    roomAnnotation = "2.2.5"
     glide = "4.11.0"
     lifeCycleExtension = "2.2.0"
     coroutines = "1.4.0-M1"
@@ -113,11 +112,14 @@ ext {
             lifeCycleExtension: "androidx.lifecycle:lifecycle-extensions:${lifeCycleExtension}",
             lifeCycleLiveData : "androidx.lifecycle:lifecycle-livedata-ktx:${lifeCycleExtension}",
             lifeCycleRuntime  : "androidx.lifecycle:lifecycle-runtime:${lifeCycleExtension}",
+            lifeCycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:${lifeCycleExtension}",
             lifecyleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecyleViewModel}"
     ]
     database = [
             room          : "androidx.room:room-runtime:${room}",
-            roomAnnotation: "androidx.room:room-compiler:${roomAnnotation}"
+            roomAnnotation: "androidx.room:room-compiler:${room}",
+            roomCoroutines: "androidx.room:room-ktx:${room}"
+
     ]
     ui_design = [
             materialDesign  : "com.google.android.material:material:${materialDesign}",
