@@ -10,14 +10,15 @@ import com.daniyal.basicappimpl.utils.Resource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainViewModel @ViewModelInject constructor(application: Application) : BaseViewModel(application) {
-    init {
-        progressDialogController.postValue(true)
+class MainViewModel @ViewModelInject constructor(application: Application) :
+    BaseViewModel(application) {
+
+    fun getData() {
+        //interactor.getData();
+        showLoader(true)
         Handler(Looper.getMainLooper()).postDelayed({
-            progressDialogController.postValue(false)
+            showLoader(false)
         }, 5000)
-
-
     }
 
 }

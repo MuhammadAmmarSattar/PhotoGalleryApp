@@ -8,7 +8,7 @@ import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.ui.base.BaseAuthenticationActivity
 import com.daniyal.basicappimpl.ui.home.viewmodels.MainViewModel
 import com.daniyal.basicappimpl.utils.LocaleContainer
-import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
+//import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,30 +22,14 @@ class MainActivity : BaseAuthenticationActivity() {
     override fun baseOnCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         _localeContainer.postValue(LocaleContainer.ARABIC)
-        subscribeToObserver()
+        subscribeUiEvents(mainViewModel)
+
+        mainViewModel.getData()
 
 
-
-
-
-        runWithPermissions(Manifest.permission.CAMERA){
-            //todo
-        }
+//        runWithPermissions(Manifest.permission.CAMERA) {
+//            //todo
+//        }
     }
-
-
-    private fun subscribeToObserver() {
-        mainViewModel.progressDialogController.observe(this) {
-            if (it) {
-                //Display Progress Bar
-                customProgressDialog?.show()
-            } else {
-                //Hide Progress Bar
-                customProgressDialog?.hide()
-            }
-
-        }
-    }
-
 
 }

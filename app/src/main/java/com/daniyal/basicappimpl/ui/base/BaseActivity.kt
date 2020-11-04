@@ -15,7 +15,7 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var applicationEntry: ApplicationEntry
     protected lateinit var bus: Bus
     protected var isBusRegistered: Boolean = false
-    protected var customProgressDialog: ProgressDialog? = null
+    private var customProgressDialog: ProgressDialog? = null
 
 
     var _localeContainer: MutableLiveData<LocaleContainer> = MutableLiveData()
@@ -32,7 +32,8 @@ abstract class BaseActivity : AppCompatActivity() {
         customProgressDialog = ProgressDialog(this)
         _localeContainer.postValue(LocaleContainer.ENGLISH)
     }
-// for array.length
+
+    // for array.length
     private fun subscribeToObserver() {
         localeContainer.observe(this) { locale ->
             when (locale) {
@@ -53,12 +54,21 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
+    fun subscribeUiEvents(baseViewModel: BaseViewModel) {
+        baseViewModel.getProgressDialogController().observe(this) {
+            if (it) {
+                customProgressDialog?.show()
+            } else {
+                customProgressDialog?.hide()
+            }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()
 
-        if (customProgressDialog!=null){
-            customProgressDialog=null
+        if (customProgressDialog != null) {
+            customProgressDialog = null
         }
 
         if (isBusRegistered) {
@@ -70,8 +80,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        if (customProgressDialog!=null){
-            customProgressDialog=null
+        if (customProgressDialog != null) {
+            customProgressDialog = null
         }
         if (isBusRegistered) {
             bus.unregister(this)
