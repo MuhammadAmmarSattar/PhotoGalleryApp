@@ -5,6 +5,7 @@ import com.daniyal.basicappimpl.data.repository.photo.local.Photo
 import com.daniyal.basicappimpl.data.repository.photo.local.PhotoDao
 import com.daniyal.basicappimpl.data.repository.photo.local.PhotoLDS
 import com.daniyal.basicappimpl.data.repository.photo.remote.PhotoRDS
+import com.daniyal.basicappimpl.utils.ProgressDialog
 import javax.inject.Inject
 
 class PhotoRepository @Inject constructor(private val photoLDS: PhotoLDS, private val photoRDS: PhotoRDS) {

@@ -129,6 +129,6 @@ dependencies {
     api config.commonDependency.otto
     //For Lottie
     implementation config.ui_design.lottieViews
-
-
+    //QuickPermissions for runtime permission
+    implementation config.ui_design.quickPermission
 }

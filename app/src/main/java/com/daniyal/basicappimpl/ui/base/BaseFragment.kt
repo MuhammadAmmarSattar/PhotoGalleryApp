@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
+import com.daniyal.basicappimpl.utils.ProgressDialog
 import com.squareup.otto.Bus
 
 abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
@@ -18,6 +19,8 @@ abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
     protected var isBusRegistered: Boolean = false
     protected lateinit var bus: Bus
     protected lateinit var activity: Activity
+    protected var customProgressDialog: ProgressDialog? = null
+
 
     // data binding
     private lateinit var dataBinding: DataBinding
@@ -34,6 +37,8 @@ abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
         bus = application.bus
         bus.register(this)
         isBusRegistered = true
+        customProgressDialog = ProgressDialog(activity)
+
 
 
     }
@@ -59,6 +64,9 @@ abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
     }
 
     protected abstract fun getFragmentLayout(): Int
+
+
+
     override fun onDestroy() {
         super.onDestroy()
         if (isBusRegistered) {

@@ -7,8 +7,10 @@ import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.ui.base.BaseActivity
 import com.daniyal.basicappimpl.ui.home.MainActivity
 import com.daniyal.basicappimpl.ui.login.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.internal.DaggerCollections
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
