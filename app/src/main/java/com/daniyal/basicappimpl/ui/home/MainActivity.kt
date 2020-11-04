@@ -3,6 +3,7 @@ package com.daniyal.basicappimpl.ui.home
 import android.Manifest
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.RequestManager
 import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.ui.base.BaseAuthenticationActivity
@@ -21,10 +22,8 @@ class MainActivity : BaseAuthenticationActivity() {
 
     override fun baseOnCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
-        _localeContainer.postValue(LocaleContainer.ARABIC)
         subscribeUiEvents(mainViewModel)
 
-        mainViewModel.getData()
 
 
 //        runWithPermissions(Manifest.permission.CAMERA) {

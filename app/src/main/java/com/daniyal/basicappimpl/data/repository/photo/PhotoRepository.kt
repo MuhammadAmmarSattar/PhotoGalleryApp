@@ -8,8 +8,8 @@ import com.daniyal.basicappimpl.data.repository.photo.remote.PhotoRDS
 import javax.inject.Inject
 
 class PhotoRepository @Inject constructor(
-    private val photoLDS: PhotoLDS,
-    private val photoRDS: PhotoRDS
+        private val photoLDS: PhotoLDS,
+        private val photoRDS: PhotoRDS
 ) {
 
     suspend fun getPhotos(): Result<List<Photo>> {
