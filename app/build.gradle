@@ -127,8 +127,8 @@ dependencies {
     implementation config.commonDependency.dataStorePref
     //For Event Management
     api config.commonDependency.otto
-
     //For Lottie
-
     implementation config.ui_design.lottieViews
+
+
 }

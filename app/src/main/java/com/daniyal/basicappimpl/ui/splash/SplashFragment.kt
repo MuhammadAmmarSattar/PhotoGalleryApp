@@ -14,7 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
 
@@ -22,6 +21,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             navigate()
+
         }
     }
     override fun getFragmentLayout() = R.layout.fragment_splash

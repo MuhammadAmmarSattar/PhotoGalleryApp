@@ -28,12 +28,11 @@ abstract class BaseActivity : AppCompatActivity() {
         subscribeToObserver()
         _localeContainer.postValue(LocaleContainer.ENGLISH)
     }
-
+// for array.length
     private fun subscribeToObserver() {
         localeContainer.observe(this) { locale ->
             when (locale) {
                 LocaleContainer.ARABIC -> {
-
                     Toast.makeText(this, LocaleContainer.ARABIC.name, Toast.LENGTH_LONG).show()
                 }
                 LocaleContainer.URDU -> {

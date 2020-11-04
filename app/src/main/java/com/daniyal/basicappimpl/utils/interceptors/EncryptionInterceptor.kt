@@ -29,11 +29,9 @@ class EncryptionInterceptor @Inject constructor(val securityManager: SecurityMan
                 Timber.e("Request Body %s", rawBodyString)
                 encryptedBody = securityManager.encrypt(rawBodyString)
                 Timber.e("Encrypted Request Body %s", encryptedBody)
-
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
 //            val body: RequestBody = RequestBody.create(mediaType, encryptedBody)
             val body:RequestBody=encryptedBody.toRequestBody(mediaType)
 

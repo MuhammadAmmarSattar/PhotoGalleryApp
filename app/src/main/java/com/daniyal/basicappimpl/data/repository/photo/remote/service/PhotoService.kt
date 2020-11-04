@@ -10,7 +10,7 @@ import retrofit2.http.POST
 interface PhotoService {
 
     @POST("/decrypted/photo")
-    suspend fun getPhoto(@Body getPhotoRequest: GetPhotoRequest): Response<PhotoResponse>
+    suspend fun getPhoto(@Body getPhotoRequest: GetPhotoRequest): PhotoResponse
 
 
     @POST("/decrypted/photos")
