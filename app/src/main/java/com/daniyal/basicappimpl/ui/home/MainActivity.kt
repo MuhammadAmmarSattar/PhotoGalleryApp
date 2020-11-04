@@ -24,10 +24,13 @@ class MainActivity : BaseAuthenticationActivity() {
         _localeContainer.postValue(LocaleContainer.ARABIC)
         subscribeToObserver()
 
+
+
+
+
         runWithPermissions(Manifest.permission.CAMERA){
             //todo
         }
-
     }
 
 
