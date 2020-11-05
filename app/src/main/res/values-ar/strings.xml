@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BasicAppImpl</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
-    <string name="switch_language">Swtich Language</string>
-
+    <string name="switch_language">تبديل اللغة</string>
 
 </resources>
+
+
+

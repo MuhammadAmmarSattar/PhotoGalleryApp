@@ -2,6 +2,7 @@ package com.daniyal.basicappimpl.ui.home
 
 import android.Manifest
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.bumptech.glide.RequestManager
 import com.daniyal.basicappimpl.R
@@ -10,10 +11,12 @@ import com.daniyal.basicappimpl.ui.home.viewmodels.MainViewModel
 import com.daniyal.basicappimpl.utils.LocaleContainer
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : BaseAuthenticationActivity() {
+class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
     @Inject
     lateinit var glide: RequestManager
@@ -23,10 +26,8 @@ class MainActivity : BaseAuthenticationActivity() {
         setContentView(R.layout.activity_main)
         _localeContainer.postValue(LocaleContainer.ARABIC)
         subscribeToObserver()
-
-
-
-
+        btn_eng.setOnClickListener(this)
+        btn_ar.setOnClickListener(this)
 
         runWithPermissions(Manifest.permission.CAMERA){
             //todo
@@ -43,9 +44,17 @@ class MainActivity : BaseAuthenticationActivity() {
                 //Hide Progress Bar
                 customProgressDialog?.hide()
             }
-
         }
     }
-
+    override fun onClick(v: View?) {
+        when(v?.id){
+        R.id.btn_eng->{
+            setLanguage(Locale.ENGLISH)
+        }
+            R.id.btn_ar->{
+                setLanguage(Locale("ar"))
+            }
+        }
+    }
 
 }

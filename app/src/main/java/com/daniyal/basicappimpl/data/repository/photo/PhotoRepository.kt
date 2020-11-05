@@ -6,10 +6,10 @@ import com.daniyal.basicappimpl.data.repository.photo.local.PhotoDao
 import com.daniyal.basicappimpl.data.repository.photo.local.PhotoLDS
 import com.daniyal.basicappimpl.data.repository.photo.remote.PhotoRDS
 import com.daniyal.basicappimpl.utils.ProgressDialog
+import com.daniyal.basicappimpl.utils.SingleLiveEvent
 import javax.inject.Inject
 
 class PhotoRepository @Inject constructor(private val photoLDS: PhotoLDS, private val photoRDS: PhotoRDS) {
-
     suspend fun getPhotos(): Result<Photo> {
         val resultLDS = photoLDS.getAll()
         return if (resultLDS.isEmpty()) {

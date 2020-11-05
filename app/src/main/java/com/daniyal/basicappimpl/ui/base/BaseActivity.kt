@@ -5,13 +5,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.daniyal.basicappimpl.utils.LocaleContainer
 import com.daniyal.basicappimpl.utils.ProgressDialog
 import com.squareup.otto.Bus
 
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : LocalizationActivity() {
     lateinit var applicationEntry: ApplicationEntry
     protected lateinit var bus: Bus
     protected var isBusRegistered: Boolean = false
