@@ -4,20 +4,17 @@ import android.app.Application
 import android.os.Handler
 import android.os.Looper
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.viewModelScope
 import com.daniyal.basicappimpl.ui.base.BaseViewModel
-import com.daniyal.basicappimpl.utils.Resource
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
-class MainViewModel @ViewModelInject constructor(application: Application) : BaseViewModel(application) {
+class MainViewModel @ViewModelInject constructor(application: Application) :
+        BaseViewModel(application) {
+
     init {
-        progressDialogController.postValue(true)
+        showLoader(true)
         Handler(Looper.getMainLooper()).postDelayed({
-            progressDialogController.postValue(false)
+            showLoader(false)
         }, 5000)
-
-
     }
+
 
 }

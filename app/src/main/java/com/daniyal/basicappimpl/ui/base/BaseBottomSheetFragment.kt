@@ -25,7 +25,7 @@ class BaseBottomSheetFragment : BottomSheetDialogFragment() {
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        application = activity?.application as ApplicationEntry
+        application = activity.application as ApplicationEntry
         bus = application.bus
         bus.register(this)
         isBusRegistered = true

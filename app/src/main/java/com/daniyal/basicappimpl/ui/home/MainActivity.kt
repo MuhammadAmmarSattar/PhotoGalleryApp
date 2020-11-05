@@ -4,12 +4,13 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.RequestManager
 import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.ui.base.BaseAuthenticationActivity
 import com.daniyal.basicappimpl.ui.home.viewmodels.MainViewModel
 import com.daniyal.basicappimpl.utils.LocaleContainer
-import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
+//import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -24,28 +25,19 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
     override fun baseOnCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
-        _localeContainer.postValue(LocaleContainer.ARABIC)
-        subscribeToObserver()
+
+
         btn_eng.setOnClickListener(this)
         btn_ar.setOnClickListener(this)
 
-        runWithPermissions(Manifest.permission.CAMERA){
-            //todo
-        }
-    }
+        subscribeUiEvents(mainViewModel)
 
 
-    private fun subscribeToObserver() {
-        mainViewModel.progressDialogController.observe(this) {
-            if (it) {
-                //Display Progress Bar
-                customProgressDialog?.show()
-            } else {
-                //Hide Progress Bar
-                customProgressDialog?.hide()
-            }
-        }
     }
+
+//        runWithPermissions(Manifest.permission.CAMERA) {
+//            //todo
+//        }
     override fun onClick(v: View?) {
         when(v?.id){
         R.id.btn_eng->{
@@ -56,5 +48,4 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
             }
         }
     }
-
 }
