@@ -1,15 +1,13 @@
 package com.daniyal.basicappimpl.ui.base
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.daniyal.basicappimpl.utils.SingleLiveEvent
 
-abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
-    private var progressDialogController: SingleLiveEvent<Boolean> = SingleLiveEvent()
-
-    fun getProgressDialogController(): SingleLiveEvent<Boolean> = progressDialogController
+abstract class BaseViewModel() : ViewModel() {
+    private var _progressDialog: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    var progressDialog: SingleLiveEvent<Boolean> = _progressDialog
 
     fun showLoader(show: Boolean) {
-        progressDialogController.postValue(show)
+        _progressDialog.postValue(show)
     }
 }

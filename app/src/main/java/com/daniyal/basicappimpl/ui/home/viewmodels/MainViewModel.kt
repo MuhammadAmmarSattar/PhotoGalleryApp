@@ -6,8 +6,8 @@ import android.os.Looper
 import androidx.hilt.lifecycle.ViewModelInject
 import com.daniyal.basicappimpl.ui.base.BaseViewModel
 
-class MainViewModel @ViewModelInject constructor(application: Application) :
-        BaseViewModel(application) {
+class MainViewModel @ViewModelInject constructor() :
+        BaseViewModel() {
 
     init {
         showLoader(true)

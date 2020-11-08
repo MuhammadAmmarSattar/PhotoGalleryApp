@@ -1,7 +1,10 @@
 package com.daniyal.basicappimpl.data.repository.photo.di
 
 import com.daniyal.basicappimpl.data.repository.ApplicationDatabase
+import com.daniyal.basicappimpl.data.repository.photo.PhotoRepository
 import com.daniyal.basicappimpl.data.repository.photo.local.PhotoDao
+import com.daniyal.basicappimpl.data.repository.photo.local.PhotoLDS
+import com.daniyal.basicappimpl.data.repository.photo.remote.PhotoRDS
 import com.daniyal.basicappimpl.data.repository.photo.remote.service.PhotoService
 import dagger.Module
 import dagger.Provides
@@ -21,5 +24,8 @@ object PhotoModule {
     @Provides
     fun providePhotoDao(appDatabase: ApplicationDatabase): PhotoDao =
         appDatabase.photoDao()
+
+    @Provides
+    fun providePhotoRepository(photoLDS: PhotoLDS,photoRDS: PhotoRDS)=PhotoRepository(photoLDS,photoRDS)
 
 }

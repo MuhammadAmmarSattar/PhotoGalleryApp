@@ -55,7 +55,7 @@ abstract class BaseActivity : LocalizationActivity() {
 //    }
 
     fun subscribeUiEvents(baseViewModel: BaseViewModel) {
-        baseViewModel.getProgressDialogController().observe(this) {
+        baseViewModel.progressDialog.observe(this) {
             if (it) {
                 customProgressDialog?.show()
             } else {
