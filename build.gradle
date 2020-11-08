@@ -29,7 +29,7 @@ task clean(type: Delete) {
 }
 ext {
     retrofit2 = "2.9.0"
-    lottieVersion="3.4.1"
+    lottieVersion = "3.4.1"
     loggingInterceptor = "4.2.2"
     retrofitGsonConvertor = "2.7.0"
     gson = "2.8.6"
@@ -65,6 +65,7 @@ ext {
     appcompat = "1.2.0"
     quickpermissionsVersion = '0.4.0'
     localizationVersion = '1.2.5'
+    textSize = "1.0.6"
     commonDependency = [
             ktx_core     : "androidx.core:core-ktx:${ktx_core}",
             multidex     : "com.android.support:multidex:${multidex}",
@@ -112,11 +113,11 @@ ext {
             mockitoAndroidTestImplementation: "org.mockito:mockito-android:${mockitoVersion}"
     ]
     androidArchitectureComponents = [
-            lifeCycleExtension: "androidx.lifecycle:lifecycle-extensions:${lifeCycleExtension}",
-            lifeCycleLiveData : "androidx.lifecycle:lifecycle-livedata-ktx:${lifeCycleExtension}",
-            lifeCycleRuntime  : "androidx.lifecycle:lifecycle-runtime:${lifeCycleExtension}",
-            lifeCycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:${lifeCycleExtension}",
-            lifecyleViewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecyleViewModel}"
+            lifeCycleExtension : "androidx.lifecycle:lifecycle-extensions:${lifeCycleExtension}",
+            lifeCycleLiveData  : "androidx.lifecycle:lifecycle-livedata-ktx:${lifeCycleExtension}",
+            lifeCycleRuntime   : "androidx.lifecycle:lifecycle-runtime:${lifeCycleExtension}",
+            lifeCycleRuntimeKtx: "androidx.lifecycle:lifecycle-runtime-ktx:${lifeCycleExtension}",
+            lifecyleViewModel  : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecyleViewModel}"
     ]
     database = [
             room          : "androidx.room:room-runtime:${room}",
@@ -130,7 +131,9 @@ ext {
             viewPager2      : "androidx.viewpager2:viewpager2:${viewPager2}",
             constraintLayout: "androidx.constraintlayout:constraintlayout:${constraintlayout}",
             lottieViews     : "com.airbnb.android:lottie:${lottieVersion}",
-            quickPermission :"com.github.quickpermissions:quickpermissions-kotlin:${quickpermissionsVersion}",
-           localization : "com.akexorcist:localization:$localizationVersion"
+            quickPermission : "com.github.quickpermissions:quickpermissions-kotlin:${quickpermissionsVersion}",
+            localization    : "com.akexorcist:localization:$localizationVersion",
+            ssp             : "com.intuit.ssp:ssp-android:$textSize",
+            sdp             : "com.intuit.sdp:sdp-android:$textSize"
     ]
 }

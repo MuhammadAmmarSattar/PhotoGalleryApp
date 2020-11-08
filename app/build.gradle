@@ -131,15 +131,12 @@ dependencies {
     implementation config.ui_design.lottieViews
     //QuickPermissions for runtime permission
     implementation config.ui_design.quickPermission
-
-
     //Localization Library
     implementation config.ui_design.localization
-
-
     //for text size
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
-
+    implementation config.ui_design.ssp
     //for screen size
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation config.ui_design.sdp
+
+
 }
