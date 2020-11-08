@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.daniyal.basicappimpl.utils.ProgressDialog
+import com.daniyal.basicappimpl.utils.event.UiEvent
 import com.squareup.otto.Bus
+import timber.log.Timber
 
 abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
 
@@ -40,7 +43,6 @@ abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
         customProgressDialog = ProgressDialog(activity)
 
 
-
     }
 
     override fun onCreateView(
@@ -65,7 +67,39 @@ abstract class BaseFragment<DataBinding : ViewDataBinding> : Fragment() {
 
     protected abstract fun getFragmentLayout(): Int
 
+    fun subscribeUiEvents(baseViewModel: BaseViewModel) {
+        baseViewModel.uiEvents.observe(viewLifecycleOwner, {
+            val event = it.getContentIfNotHandled()
+            event!!.run {
+                when (event) {
+                    is UiEvent.ShowAlert -> {
+                        showAlert(event.message)
+                    }
+                    is UiEvent.ShowToast -> {
+                        showToast(event.message)
+                    }
+                    is UiEvent.ShowLoader -> {
+                        showLoader(event.show)
+                    }
+                }
+            }
+        })
+    }
 
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showAlert(message: String) {
+    }
+
+    private fun showLoader(show: Boolean) {
+        if (show) {
+            customProgressDialog?.show()
+        } else {
+            customProgressDialog?.hide()
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

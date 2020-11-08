@@ -2,14 +2,29 @@ package com.daniyal.basicappimpl.ui.base
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.daniyal.basicappimpl.utils.SingleLiveEvent
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.daniyal.basicappimpl.utils.event.Event
+import com.daniyal.basicappimpl.utils.event.SingleLiveEvent
+import com.daniyal.basicappimpl.utils.event.UiEvent
 
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
-    private var progressDialogController: SingleLiveEvent<Boolean> = SingleLiveEvent()
+    private val uiEventsLiveData = MutableLiveData<Event<UiEvent>>()
 
-    fun getProgressDialogController(): SingleLiveEvent<Boolean> = progressDialogController
+    val uiEvents: LiveData<Event<UiEvent>>
+        get() = uiEventsLiveData
+
 
     fun showLoader(show: Boolean) {
-        progressDialogController.postValue(show)
+        uiEventsLiveData.value = Event(UiEvent.ShowLoader(show))
+    }
+
+    fun showAlert(title: String = "Alert", message: String) {
+        uiEventsLiveData.value = Event(UiEvent.ShowAlert(title = title, message = message))
+    }
+
+    fun showToast(message: String) {
+        uiEventsLiveData.value = Event(UiEvent.ShowToast(message))
+
     }
 }

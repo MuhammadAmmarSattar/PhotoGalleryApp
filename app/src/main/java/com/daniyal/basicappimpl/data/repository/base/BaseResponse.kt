@@ -1,4 +1,4 @@
-package com.daniyal.basicappimpl.dto.response
+package com.daniyal.basicappimpl.data.repository.base
 
 open class BaseResponse() {
     val statusCode: Int = 0

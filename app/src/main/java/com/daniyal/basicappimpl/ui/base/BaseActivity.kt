@@ -9,7 +9,9 @@ import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.daniyal.basicappimpl.utils.LocaleContainer
 import com.daniyal.basicappimpl.utils.ProgressDialog
+import com.daniyal.basicappimpl.utils.event.UiEvent
 import com.squareup.otto.Bus
+import timber.log.Timber
 
 
 abstract class BaseActivity : LocalizationActivity() {
@@ -55,12 +57,36 @@ abstract class BaseActivity : LocalizationActivity() {
 //    }
 
     fun subscribeUiEvents(baseViewModel: BaseViewModel) {
-        baseViewModel.getProgressDialogController().observe(this) {
-            if (it) {
-                customProgressDialog?.show()
-            } else {
-                customProgressDialog?.hide()
+        baseViewModel.uiEvents.observe(this, {
+            val event = it.getContentIfNotHandled()
+            event!!.run {
+                when (event) {
+                    is UiEvent.ShowAlert -> {
+                        showAlert(event.message)
+                    }
+                    is UiEvent.ShowToast -> {
+                        showToast(event.message)
+                    }
+                    is UiEvent.ShowLoader -> {
+                        showLoader(event.show)
+                    }
+                }
             }
+        })
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this@BaseActivity, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showAlert(message: String) {
+    }
+
+    private fun showLoader(show: Boolean) {
+        if (show) {
+            customProgressDialog?.show()
+        } else {
+            customProgressDialog?.hide()
         }
     }
 
