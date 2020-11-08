@@ -1,4 +1,4 @@
-package com.daniyal.basicappimpl.utils
+package com.daniyal.basicappimpl.utils.event
 
 import androidx.lifecycle.Observer
 

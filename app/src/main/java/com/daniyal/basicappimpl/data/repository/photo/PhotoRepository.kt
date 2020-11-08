@@ -5,8 +5,6 @@ import com.daniyal.basicappimpl.data.repository.photo.local.Photo
 import com.daniyal.basicappimpl.data.repository.photo.local.PhotoLDS
 import com.daniyal.basicappimpl.data.repository.photo.mapper.transform
 import com.daniyal.basicappimpl.data.repository.photo.remote.PhotoRDS
-import com.daniyal.basicappimpl.utils.ProgressDialog
-import com.daniyal.basicappimpl.utils.SingleLiveEvent
 import javax.inject.Inject
 
 class PhotoRepository @Inject constructor(

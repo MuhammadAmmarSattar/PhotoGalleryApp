@@ -1,7 +1,6 @@
-package com.daniyal.basicappimpl.utils
+package com.daniyal.basicappimpl.utils.event
 
 
-import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
