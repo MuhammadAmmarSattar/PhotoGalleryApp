@@ -11,13 +11,12 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, PhotoRepository>() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     @Inject
     lateinit var photoRepository: PhotoRepository
 
 
-    override fun getViewModel() = AuthViewModel::class.java
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -25,7 +24,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, PhotoRep
     ) = FragmentLoginBinding.inflate(inflater, container, false)
 
 
-    override fun getFragmentRepository() = photoRepository
 
 
 //    override fun getFragmentLayout() = R.layout.fragment_login

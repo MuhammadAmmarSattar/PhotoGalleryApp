@@ -33,7 +33,6 @@ class SecurityManager @Inject constructor() {
         val key = SecretKeySpec(KEY.toByteArray(CHAR_SET), ALGORITHM)
 
         cipher.init(Cipher.DECRYPT_MODE, key, IvParameterSpec(BYTE_IV))
-
         val bytes = Base64.getDecoder().decode(cipherText)
         return String(cipher.doFinal(bytes))
     }

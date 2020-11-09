@@ -12,19 +12,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SplashFragment : BaseFragment<AuthViewModel, FragmentSplashBinding, PhotoRepository>() {
-//BaseFragment<AuthViewModel, FragmentSplashBinding, PhotoRepository>
+class SplashFragment : BaseFragment<FragmentSplashBinding>() {
    @Inject
    lateinit var photoRepository:PhotoRepository
-    override fun getViewModel()=AuthViewModel::class.java
 
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    )= FragmentSplashBinding.inflate(inflater,container,false)
+    override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?)=
+        FragmentSplashBinding.inflate(inflater,container,false)
 
 
-    override fun getFragmentRepository()= photoRepository
 //
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)

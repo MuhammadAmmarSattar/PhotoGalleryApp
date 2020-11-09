@@ -25,7 +25,4 @@ object PhotoModule {
     fun providePhotoDao(appDatabase: ApplicationDatabase): PhotoDao =
         appDatabase.photoDao()
 
-    @Provides
-    fun providePhotoRepository(photoLDS: PhotoLDS,photoRDS: PhotoRDS)=PhotoRepository(photoLDS,photoRDS)
-
 }

@@ -1,14 +1,13 @@
 package com.daniyal.basicappimpl.ui.base
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
-import com.daniyal.basicappimpl.utils.LocaleContainer
 import com.daniyal.basicappimpl.utils.ProgressDialog
+import com.daniyal.basicappimpl.utils.event.EventUtilFunctions.showAlert
+import com.daniyal.basicappimpl.utils.event.EventUtilFunctions.showLoader
+import com.daniyal.basicappimpl.utils.event.EventUtilFunctions.showToast
+import com.daniyal.basicappimpl.utils.event.UiEvent
 import com.squareup.otto.Bus
 
 
@@ -55,14 +54,24 @@ abstract class BaseActivity : LocalizationActivity() {
 //    }
 
     fun subscribeUiEvents(baseViewModel: BaseViewModel) {
-        baseViewModel.progressDialog.observe(this) {
-            if (it) {
-                customProgressDialog?.show()
-            } else {
-                customProgressDialog?.hide()
-            }
-        }
+        baseViewModel.uiEvents.observe(this, {
+            it.getContentIfNotHandled()
+                ?.let { event ->
+                    when (event) {
+                        is UiEvent.ShowAlert -> {
+                            showAlert(event.message)
+                        }
+                        is UiEvent.ShowToast -> {
+                            showToast(event.message,this)
+                        }
+                        is UiEvent.ShowLoader -> {
+                            showLoader(event.show,customProgressDialog)
+                        }
+                    }
+                }
+        })
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

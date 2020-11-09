@@ -8,21 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.daniyal.basicappimpl.data.repository.base.BaseRepository
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.daniyal.basicappimpl.utils.ProgressDialog
 import com.squareup.otto.Bus
 
-abstract class BaseFragment<VM : ViewModel, DB : ViewDataBinding, R : BaseRepository> : Fragment() {
+abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
 
     protected lateinit var application: ApplicationEntry
     protected var isBusRegistered: Boolean = false
     protected lateinit var bus: Bus
     protected lateinit var activity: Activity
     protected var customProgressDialog: ProgressDialog? = null
-    protected lateinit var viewModel: VM
 
 
     // data binding
@@ -53,8 +49,7 @@ abstract class BaseFragment<VM : ViewModel, DB : ViewDataBinding, R : BaseReposi
         // View is created using layout Id
         dataBinding = getFragmentBinding(inflater, container)
 //        dataBinding = DataBindingUtil.inflate(inflater, getFragmentLayout(), container, false)
-        val factory = ViewModelFactory(getFragmentRepository())
-        viewModel = ViewModelProvider(this, factory).get(getViewModel())
+
         return dataBinding.root
     }
 
@@ -71,9 +66,7 @@ abstract class BaseFragment<VM : ViewModel, DB : ViewDataBinding, R : BaseReposi
 //    protected abstract fun getFragmentLayout(): Int
 
     //
-    protected abstract fun getViewModel(): Class<VM>
     protected abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): DB
-    protected abstract fun getFragmentRepository(): R
 
 
     override fun onDestroy() {
