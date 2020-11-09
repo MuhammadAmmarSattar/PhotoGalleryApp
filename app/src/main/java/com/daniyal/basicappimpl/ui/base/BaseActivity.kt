@@ -18,40 +18,15 @@ abstract class BaseActivity : LocalizationActivity() {
     private var customProgressDialog: ProgressDialog? = null
 
 
-//    var _localeContainer: MutableLiveData<LocaleContainer> = MutableLiveData()
-//    private var localeContainer: LiveData<LocaleContainer> = _localeContainer
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         applicationEntry = application as ApplicationEntry
         bus = applicationEntry.bus
         bus.register(this)
         isBusRegistered = true
-//        subscribeToObserver()
         customProgressDialog = ProgressDialog(this)
-//        _localeContainer.postValue(LocaleContainer.ENGLISH)
     }
 
-    // for array.length
-//    private fun subscribeToObserver() {
-//        localeContainer.observe(this) { locale ->
-//            when (locale) {
-//                LocaleContainer.ARABIC -> {
-//                    Toast.makeText(this, LocaleContainer.ARABIC.name, Toast.LENGTH_LONG).show()
-//                }
-//                LocaleContainer.URDU -> {
-//                    Toast.makeText(this, LocaleContainer.URDU.name, Toast.LENGTH_LONG).show()
-//                }
-//                else -> {
-//                    //Default Locale Will Be English
-//                    Toast.makeText(this, LocaleContainer.ENGLISH.name, Toast.LENGTH_LONG).show()
-//
-//                }
-//            }
-//        }
-//
-//    }
 
     fun subscribeUiEvents(baseViewModel: BaseViewModel) {
         baseViewModel.uiEvents.observe(this, {
@@ -62,10 +37,10 @@ abstract class BaseActivity : LocalizationActivity() {
                             showAlert(event.message)
                         }
                         is UiEvent.ShowToast -> {
-                            showToast(event.message,this)
+                            showToast(event.message, this)
                         }
                         is UiEvent.ShowLoader -> {
-                            showLoader(event.show,customProgressDialog)
+                            showLoader(event.show, customProgressDialog)
                         }
                     }
                 }

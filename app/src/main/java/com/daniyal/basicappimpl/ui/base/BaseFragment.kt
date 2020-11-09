@@ -10,6 +10,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.daniyal.basicappimpl.utils.ProgressDialog
+import com.daniyal.basicappimpl.utils.event.EventUtilFunctions
+import com.daniyal.basicappimpl.utils.event.UiEvent
 import com.squareup.otto.Bus
 
 abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
@@ -76,5 +78,26 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
             isBusRegistered = false
         }
     }
+
+    fun subscribeUiEvents(baseViewModel: BaseViewModel) {
+        baseViewModel.uiEvents.observe(viewLifecycleOwner, {
+            it.getContentIfNotHandled()
+                ?.let { event ->
+                    when (event) {
+                        is UiEvent.ShowAlert -> {
+                            EventUtilFunctions.showAlert(event.message)
+                        }
+                        is UiEvent.ShowToast -> {
+                            EventUtilFunctions.showToast(event.message, activity)
+                        }
+                        is UiEvent.ShowLoader -> {
+                            EventUtilFunctions.showLoader(event.show, customProgressDialog)
+                        }
+                    }
+                }
+        })
+    }
+
+
 
 }
