@@ -12,15 +12,16 @@ abstract class BaseViewModel() : ViewModel() {
 
 
     fun showLoader(show: Boolean) {
-        _uiEventsLiveData.value = Event(UiEvent.ShowLoader(show))
+        _uiEventsLiveData.postValue(Event(UiEvent.ShowLoader(show)))
     }
 
     fun showAlert(title: String = "Alert", message: String) {
-        _uiEventsLiveData.value = Event(UiEvent.ShowAlert(title = title, message = message))
+        _uiEventsLiveData.postValue(Event(UiEvent.ShowAlert(title = title, message = message)))
     }
 
     fun showToast(message: String) {
-        _uiEventsLiveData.value = Event(UiEvent.ShowToast(message))
+//        _uiEventsLiveData.value = Event(UiEvent.ShowToast(message))
+        _uiEventsLiveData.postValue(Event(UiEvent.ShowToast(message)))
 
     }
 }

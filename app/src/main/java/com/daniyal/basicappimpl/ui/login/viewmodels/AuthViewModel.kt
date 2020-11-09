@@ -11,6 +11,7 @@ class AuthViewModel @ViewModelInject constructor(private val photoRepository: Ph
     init {
         viewModelScope.launch {
             photoRepository.getPhotos()
+            showToast("Request has been initiated.")
         }
     }
 }
