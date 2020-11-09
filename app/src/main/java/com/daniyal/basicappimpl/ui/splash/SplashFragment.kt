@@ -20,8 +20,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
-   @Inject
-   lateinit var photoRepository:PhotoRepository
+
 
     override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?)=
         FragmentSplashBinding.inflate(inflater,container,false)
