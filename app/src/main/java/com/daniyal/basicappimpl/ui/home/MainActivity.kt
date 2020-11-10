@@ -21,6 +21,7 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
     @Inject
     lateinit var glide: RequestManager
+
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun baseOnCreate(savedInstanceState: Bundle?) {
