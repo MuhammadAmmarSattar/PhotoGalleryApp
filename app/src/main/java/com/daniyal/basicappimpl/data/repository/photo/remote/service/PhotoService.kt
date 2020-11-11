@@ -1,5 +1,6 @@
 package com.daniyal.basicappimpl.data.repository.photo.remote.service
 
+import com.daniyal.basicappimpl.data.Result
 import com.daniyal.basicappimpl.data.repository.photo.remote.request.GetPhotoRequest
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoResponse
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotosResponse
@@ -14,5 +15,5 @@ interface PhotoService {
 
 
     @POST("/decrypted/photos")
-    suspend fun getPhotos(@Body getPhotoRequest: GetPhotoRequest): Response<PhotosResponse>
+    suspend fun getPhotos(@Body getPhotoRequest: GetPhotoRequest): PhotosResponse
 }
