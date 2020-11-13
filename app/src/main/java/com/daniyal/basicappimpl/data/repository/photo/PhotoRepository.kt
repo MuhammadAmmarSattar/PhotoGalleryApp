@@ -12,9 +12,9 @@ class PhotoRepository @Inject constructor(
          val photoLDS: PhotoLDS,
          val photoRDS: PhotoRDS
 ) :BaseRepository(){
-    suspend fun getPhotos() =safeApiCall {
+    suspend fun getPhotos(): Result<List<Photo>> {
         val resultLDS = photoLDS.getAll()
-        return@safeApiCall if (resultLDS.isEmpty()) {
+        return if (resultLDS.isEmpty()) {
             when (val resultRDS = photoRDS.getPhotos()) {
                 is Result.Success -> {
                     // Single Source Of Truth -> get data from server -> save to db -> get from db to provide to UI
@@ -28,34 +28,11 @@ class PhotoRepository @Inject constructor(
                     resultRDS
                 }
                 is Result.Failure->{
+                    resultRDS
                 }
-                else -> Unit
             }
         } else {
             Result.Success(resultLDS)
         }
     }
-
-
-
-//    suspend fun getPhotos(): Result<List<Photo>> {
-//        val resultLDS = photoLDS.getAll()
-//        return if (resultLDS.isEmpty()) {
-//            when (val resultRDS = photoRDS.getPhotos()) {
-//                is Result.Success -> {
-//                    // Single Source Of Truth -> get data from server -> save to db -> get from db to provide to UI
-//                    val listRDS = resultRDS.data.photos
-//                    val listLDS = transform(listRDS)
-//                    photoLDS.insertAll(listLDS as MutableList<Photo>)
-//                    val resultLDS = photoLDS.getAll()
-//                    Result.Success(resultLDS)
-//                }
-//                is Result.Error -> {
-//                    resultRDS
-//                }
-//            }
-//        } else {
-//            Result.Success(resultLDS)
-//        }
-//    }
 }
