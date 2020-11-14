@@ -1,6 +1,6 @@
-package com.example.basearchitecture.common.Utils.interceptors
+package com.daniyal.basicappimpl.utils.interceptors
 
-import com.example.basearchitecture.common.Utils.SessionManager
+import com.daniyal.basicappimpl.utils.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.basearchitecture.common.Utils
+package com.daniyal.basicappimpl.utils
 
 import javax.inject.Inject
 

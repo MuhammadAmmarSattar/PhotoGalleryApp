@@ -1,4 +1,4 @@
-package com.example.basearchitecture.common.Utils.dataStore
+package com.daniyal.basicappimpl.utils.dataStore
 
 import androidx.datastore.preferences.preferencesKey
 

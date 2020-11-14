@@ -2,9 +2,9 @@ package com.daniyal.basicappimpl.di
 
 import com.daniyal.basicappimpl.AppConstants
 import com.daniyal.basicappimpl.BuildConfig
-import com.example.basearchitecture.common.Utils.interceptors.DecryptionInterceptor
-import com.example.basearchitecture.common.Utils.interceptors.EncryptionInterceptor
-import com.example.basearchitecture.common.Utils.interceptors.HeaderInterceptor
+import com.daniyal.basicappimpl.utils.interceptors.DecryptionInterceptor
+import com.daniyal.basicappimpl.utils.interceptors.EncryptionInterceptor
+import com.daniyal.basicappimpl.utils.interceptors.HeaderInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -35,10 +35,10 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-            loggingInterceptor: HttpLoggingInterceptor,
-            headerInterceptor: HeaderInterceptor,
-            encryptionInterceptor: EncryptionInterceptor,
-            decryptionInterceptor: DecryptionInterceptor
+        loggingInterceptor: HttpLoggingInterceptor,
+        headerInterceptor: HeaderInterceptor,
+        encryptionInterceptor: EncryptionInterceptor,
+        decryptionInterceptor: DecryptionInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
                 .addInterceptor(headerInterceptor)

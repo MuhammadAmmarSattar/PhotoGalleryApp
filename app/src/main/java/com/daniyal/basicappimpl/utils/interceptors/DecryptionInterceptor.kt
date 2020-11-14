@@ -1,20 +1,19 @@
-package com.example.basearchitecture.common.Utils.interceptors
+package com.daniyal.basicappimpl.utils.interceptors
 
 import android.os.Build
 import android.text.TextUtils
 import androidx.annotation.RequiresApi
 import com.daniyal.basicappimpl.BuildConfig
-import com.example.basearchitecture.common.Utils.SecurityManager
+import com.daniyal.basicappimpl.utils.security.rds.SecurityManagerRDS
 import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
-import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import timber.log.Timber
 import javax.inject.Inject
 
-class DecryptionInterceptor @Inject constructor(val securityManager: SecurityManager) :
+class DecryptionInterceptor @Inject constructor(private val securityManager: SecurityManagerRDS) :
     Interceptor {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun intercept(chain: Interceptor.Chain): Response {
