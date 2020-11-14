@@ -41,24 +41,24 @@ object RetrofitModule {
         decryptionInterceptor: DecryptionInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(headerInterceptor)
-                .addInterceptor(loggingInterceptor)
-                .addInterceptor(encryptionInterceptor)
-                .addInterceptor(decryptionInterceptor)
-                .connectionSpecs(
-                        Arrays.asList(
-                                ConnectionSpec.MODERN_TLS,
-                                ConnectionSpec.COMPATIBLE_TLS
-                        )
+            .addInterceptor(headerInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(encryptionInterceptor)
+            .addInterceptor(decryptionInterceptor)
+            .connectionSpecs(
+                Arrays.asList(
+                    ConnectionSpec.MODERN_TLS,
+                    ConnectionSpec.COMPATIBLE_TLS
                 )
-                .followRedirects(true)
-                .followSslRedirects(true)
-                .retryOnConnectionFailure(true)
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .cache(null)
-                .build()
+            )
+            .followRedirects(true)
+            .followSslRedirects(true)
+            .retryOnConnectionFailure(true)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
+//                .cache(null)
+            .build()
 
     }
 //        if (RestConfig.DEBUG) { // debug ON
@@ -89,10 +89,10 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
-            Retrofit.Builder()
-                    .baseUrl(AppConstants.BASE_URL)
-                    .client(okHttpClient)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
+        Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 }

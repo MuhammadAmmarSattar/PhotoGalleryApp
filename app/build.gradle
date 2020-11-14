@@ -78,7 +78,6 @@ dependencies {
     implementation config.retrofitDependency.retrofit2AdatperRxJava
 
     implementation config.commonDependency.gson
-    implementation config.retrofitDependency.okhttp
     // rx java
     implementation config.reactive_extension.rxJava2
     // testing

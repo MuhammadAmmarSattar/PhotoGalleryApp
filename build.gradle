@@ -30,10 +30,9 @@ task clean(type: Delete) {
 ext {
     retrofit2 = "2.9.0"
     lottieVersion = "3.4.1"
-    loggingInterceptor = "4.2.2"
-    retrofitGsonConvertor = "2.7.0"
+    loggingInterceptor = "4.9.0"
+    retrofitGsonConvertor = "2.9.0"
     gson = "2.8.6"
-    okhttp = "4.2.2"
     retrofit2AdatperRxJava = "2.9.0"
     rxJava2 = "2.1.1"
     junit = "4.12"
@@ -81,8 +80,7 @@ ext {
             retrofit2             : "com.squareup.retrofit2:retrofit:${retrofit2}",
             loggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:${loggingInterceptor}",
             retrofitGsonConvertor : "com.squareup.retrofit2:converter-gson:${retrofitGsonConvertor}",
-            retrofit2AdatperRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofit2AdatperRxJava}",
-            okhttp                : "com.squareup.okhttp3:okhttp:${okhttp}"
+            retrofit2AdatperRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofit2AdatperRxJava}"
     ]
     navigationDependency = [
             navFragment: "androidx.navigation:navigation-fragment-ktx:${navFragment}",
