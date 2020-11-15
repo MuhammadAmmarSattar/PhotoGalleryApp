@@ -22,17 +22,57 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("Boolean", "IS_ENCRYPTION_ENABLED", "false")
-        buildConfigField("String", "DATA_STORE_NAME", "\"my_app_data_store\"")
-        buildConfigField("String", "DB_NAME", "\"my_room_db\"")
-        buildConfigField("String", "BASE_URL", "\"https://8bc1dd86-134b-4cba-8faf-1913c2adec08.mock.pstmn.io\"")
-
     }
-
+    signingConfigs {
+        stagConfig {
+            storeFile file("../certificates/stagingKS.jks")
+            storePassword "dj123456789"
+            keyAlias "staging"
+            keyPassword "dj123456789"
+        }
+        prodConfig {
+            storeFile file("../certificates/productionKS.jks")
+            storePassword "dj123456789"
+            keyAlias "production"
+            keyPassword "dj123456789"
+        }
+    }
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix ".debug"
             minifyEnabled false
+            debuggable true
+            buildConfigField("String", "BASE_URL", "\"https://8bc1dd86-134b-4cba-8faf-1913c2adec08.mock.pstmn.io\"")
+            buildConfigField("Boolean", "IS_ENCRYPTION_ENABLED", "false")
+            buildConfigField("Boolean", "IS_TSL_ENABLED", "false")
+            buildConfigField("String", "DATA_STORE_NAME", "\"DATA_STORE_DEBUG\"")
+            buildConfigField("String", "DB_NAME", "\"ROOM_DB_DEBUG\"")
+
+        }
+        stag {
+            applicationIdSuffix ".stag"
+            minifyEnabled false
+            debuggable true
+            buildConfigField("String", "BASE_URL", "\"https://8bc1dd86-134b-4cba-8faf-1913c2adec08.mock.pstmn.io\"")
+            buildConfigField("Boolean", "IS_ENCRYPTION_ENABLED", "false")
+            buildConfigField("Boolean", "IS_TSL_ENABLED", "false")
+            buildConfigField("String", "DATA_STORE_NAME", "\"DATA_STORE_STAG\"")
+            buildConfigField("String", "DB_NAME", "\"ROOM_DB_STAG\"")
+            signingConfig signingConfigs.stagConfig
+
+        }
+        prod {
+            applicationIdSuffix ".prod"
+            minifyEnabled true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"https://8bc1dd86-134b-4cba-8faf-1913c2adec08.mock.pstmn.io\"")
+            buildConfigField("Boolean", "IS_ENCRYPTION_ENABLED", "false")
+            buildConfigField("Boolean", "IS_TSL_ENABLED", "false")
+            buildConfigField("String", "DATA_STORE_NAME", "\"DATA_STORE_PROD\"")
+            buildConfigField("String", "DB_NAME", "\"ROOM_DB_PROD\"")
+            signingConfig signingConfigs.prodConfig
+
         }
     }
     compileOptions {
@@ -44,17 +84,6 @@ android {
         jvmTarget = "1.8"
     }
 
-    flavorDimensions "server"
-    productFlavors {
-        stag {
-            dimension "server"
-            versionNameSuffix "-stag"
-        }
-        prod {
-            dimension "server"
-            versionNameSuffix "-prd"
-        }
-    }
     buildFeatures {
         dataBinding = true
 
