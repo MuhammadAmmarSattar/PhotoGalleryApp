@@ -5,6 +5,7 @@ import com.daniyal.basicappimpl.BuildConfig
 import com.daniyal.basicappimpl.utils.interceptors.DecryptionInterceptor
 import com.daniyal.basicappimpl.utils.interceptors.EncryptionInterceptor
 import com.daniyal.basicappimpl.utils.interceptors.HeaderInterceptor
+import com.daniyal.basicappimpl.utils.security.tls.TLS
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -38,8 +39,10 @@ object RetrofitModule {
         loggingInterceptor: HttpLoggingInterceptor,
         headerInterceptor: HeaderInterceptor,
         encryptionInterceptor: EncryptionInterceptor,
-        decryptionInterceptor: DecryptionInterceptor
+        decryptionInterceptor: DecryptionInterceptor,
+        tls: TLS
     ): OkHttpClient {
+        val tlsConfig = tls.getConfig()
         return OkHttpClient.Builder()
             .addInterceptor(headerInterceptor)
             .addInterceptor(loggingInterceptor)
@@ -57,7 +60,9 @@ object RetrofitModule {
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
-//                .cache(null)
+            .cache(null)
+            .sslSocketFactory(tlsConfig.first, tlsConfig.second)
+            //add custom hostNameVerifier if ssl gets hostname verification failed
             .build()
 
     }
