@@ -13,6 +13,8 @@ import com.daniyal.basicappimpl.utils.ProgressDialog
 import com.daniyal.basicappimpl.utils.event.EventUtilFunctions
 import com.daniyal.basicappimpl.utils.event.UiEvent
 import com.squareup.otto.Bus
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 
 abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
 
@@ -21,6 +23,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
     protected lateinit var bus: Bus
     protected lateinit var activity: Activity
     protected var customProgressDialog: ProgressDialog? = null
+    protected var groupAdapter: GroupAdapter<GroupieViewHolder>? = null
 
 
     // data binding
@@ -39,6 +42,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
         bus.register(this)
         isBusRegistered = true
         customProgressDialog = ProgressDialog(activity)
+        groupAdapter= GroupAdapter()
 
 
     }
@@ -48,26 +52,16 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // View is created using layout Id
         dataBinding = getFragmentBinding(inflater, container)
-//        dataBinding = DataBindingUtil.inflate(inflater, getFragmentLayout(), container, false)
-
         return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         //ViewModel is set as Binding Variable
-        dataBinding.apply {
-            lifecycleOwner = viewLifecycleOwner
-        }
-
+        dataBinding.apply { lifecycleOwner = viewLifecycleOwner }
     }
 
-//    protected abstract fun getFragmentLayout(): Int
-
-    //
     protected abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): DB
 
 
@@ -77,6 +71,8 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
             bus.unregister(this)
             isBusRegistered = false
         }
+        groupAdapter?.clear()
+
     }
 
     fun subscribeUiEvents(baseViewModel: BaseViewModel) {
@@ -97,7 +93,6 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
                 }
         })
     }
-
 
 
 }
