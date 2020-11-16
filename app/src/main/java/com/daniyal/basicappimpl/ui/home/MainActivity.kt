@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.work.WorkInfo
+import androidx.work.workDataOf
 import com.bumptech.glide.RequestManager
 import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.ui.base.BaseAuthenticationActivity
@@ -26,14 +28,11 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
     override fun baseOnCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
-
-
         btn_eng.setOnClickListener(this)
         btn_ar.setOnClickListener(this)
-
+        btn_wm.setOnClickListener (this)
+        mainViewModel.outputWorkInfos.observe(this, workInfosObserver())
         subscribeUiEvents(mainViewModel)
-
-
     }
 
 //        runWithPermissions(Manifest.permission.CAMERA) {
@@ -47,6 +46,21 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
             R.id.btn_ar->{
                 setLanguage(Locale("ar"))
             }
+            R.id.btn_wm->{
+                mainViewModel.applyCompression()
+            }
         }
+    }
+
+    private fun workInfosObserver():androidx.lifecycle.Observer<List<WorkInfo>>{
+        return androidx.lifecycle.Observer{listOfWorkInfo->
+            if(listOfWorkInfo.isNullOrEmpty()){return@Observer}
+                if(listOfWorkInfo[0].state.isFinished){
+                        mainViewModel.showToast("Work is Finished")
+                }else{
+                    mainViewModel.showToast("Work In Progress")
+                }
+        }
+
     }
 }
