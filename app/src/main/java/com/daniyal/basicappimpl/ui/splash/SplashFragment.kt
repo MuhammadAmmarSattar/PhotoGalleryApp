@@ -3,8 +3,10 @@ package com.daniyal.basicappimpl.ui.splash
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.WorkInfo
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoDTO
 import com.daniyal.basicappimpl.databinding.FragmentSplashBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
@@ -12,6 +14,7 @@ import com.daniyal.basicappimpl.ui.callbacks.GroupieInterface
 import com.daniyal.basicappimpl.ui.home.adapters.MainViewItem
 import com.daniyal.basicappimpl.ui.home.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_splash.*
 
 @AndroidEntryPoint
@@ -31,30 +34,27 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         PhotoDTO("3", "this is description 3", 23),
         PhotoDTO("4", "this is description 4", 24),
     )
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         subscribeUiEvents(mainViewModel)
         setupRecyclerView()
         fillRecyclerView(photoDTOs)
-    }
+        mainViewModel.outputWorkInfos.observe(viewLifecycleOwner, workInfosObserver())
+        binding.btnWm.setOnClickListener { mainViewModel.applyCompression() }
 
+    }
     private fun fillRecyclerView(items: List<PhotoDTO>) {
         items.forEach { photoDTO ->
             groupAdapter?.add(MainViewItem(photoDTO, this))
         }
     }
-
-
     private fun setupRecyclerView() {
         linearLayoutManager = LinearLayoutManager(activity)
         mainRv.apply {
             layoutManager = linearLayoutManager
             adapter = groupAdapter
         }
-
     }
-
     override fun invokeSingleItemClick(item: PhotoDTO, position: Int) {
         mainViewModel.showToast("${item.desc} - ${position}")
     }
@@ -73,6 +73,17 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 //        delay(3000)
 //        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
 //    }
+    private fun workInfosObserver():androidx.lifecycle.Observer<List<WorkInfo>>{
+        return androidx.lifecycle.Observer{listOfWorkInfo->
 
+            if(listOfWorkInfo.isNullOrEmpty()){return@Observer}
+            if(listOfWorkInfo[0].state.isFinished){
+                mainViewModel.showToast("Work is Finished")
+            }else{
+                mainViewModel.showToast("Work In Progress")
+            }
+        }
+
+    }
 
 }

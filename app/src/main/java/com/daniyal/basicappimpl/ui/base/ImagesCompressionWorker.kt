@@ -19,7 +19,6 @@ class ImagesCompressionWorker(ctx: Context, params: WorkerParameters) : Worker(c
         // return res.failure() and res.retry() task will excute again sometime.
         makeStatusNotification(message = "Image Compression start Working", context = applicationContext)
         sleep()
-
          return try {
                 for(i in 0..10){
                     Log.d(TAG, "do Compression Work:  $i")

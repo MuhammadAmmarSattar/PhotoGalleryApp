@@ -43,7 +43,6 @@ import timber.log.Timber
  * @param context Context needed to create Toast
  */
 fun makeStatusNotification(message: String, context: Context) {
-
     // Make a channel if necessary
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         // Create the NotificationChannel, but only on API 26+ because
@@ -56,7 +55,6 @@ fun makeStatusNotification(message: String, context: Context) {
         // Add the channel
         val notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-
         notificationManager?.createNotificationChannel(channel)
     }
     // Create the notification
