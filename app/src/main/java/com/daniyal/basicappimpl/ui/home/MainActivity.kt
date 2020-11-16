@@ -21,9 +21,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
-    @Inject
-    lateinit var glide: RequestManager
-
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun baseOnCreate(savedInstanceState: Bundle?) {
@@ -33,12 +30,21 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
         btn_wm.setOnClickListener (this)
         mainViewModel.outputWorkInfos.observe(this, workInfosObserver())
         subscribeUiEvents(mainViewModel)
+
     }
 
 //        runWithPermissions(Manifest.permission.CAMERA) {
 //            //todo
 //        }
     override fun onClick(v: View?) {
+//        when(v?.id){
+//        R.id.btn_eng->{
+//            setLanguage(Locale.ENGLISH)
+//        }
+//            R.id.btn_ar->{
+//                setLanguage(Locale("ar"))
+//            }
+//        }
         when(v?.id){
         R.id.btn_eng->{
             setLanguage(Locale.ENGLISH)

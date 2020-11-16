@@ -1,6 +1,5 @@
 package com.daniyal.basicappimpl.di
 
-import com.daniyal.basicappimpl.AppConstants
 import com.daniyal.basicappimpl.BuildConfig
 import com.daniyal.basicappimpl.utils.interceptors.DecryptionInterceptor
 import com.daniyal.basicappimpl.utils.interceptors.EncryptionInterceptor
@@ -42,8 +41,7 @@ object RetrofitModule {
         decryptionInterceptor: DecryptionInterceptor,
         tls: TLS
     ): OkHttpClient {
-        val tlsConfig = tls.getConfig()
-        return OkHttpClient.Builder()
+        val builder = OkHttpClient.Builder()
             .addInterceptor(headerInterceptor)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(encryptionInterceptor)
@@ -61,9 +59,13 @@ object RetrofitModule {
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
             .cache(null)
-            .sslSocketFactory(tlsConfig.first, tlsConfig.second)
+        if (BuildConfig.IS_TSL_ENABLED) {
+            val tlsConfig = tls.getConfig()
+            builder.sslSocketFactory(tlsConfig.first, tlsConfig.second)
             //add custom hostNameVerifier if ssl gets hostname verification failed
-            .build()
+        }
+
+        return builder.build()
 
     }
 //        if (RestConfig.DEBUG) { // debug ON
