@@ -71,7 +71,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
             bus.unregister(this)
             isBusRegistered = false
         }
-        groupAdapter?.clear()
+        groupAdapter.clear()
 
     }
 

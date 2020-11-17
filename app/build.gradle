@@ -135,7 +135,9 @@ dependencies {
     implementation config.androidArchitectureComponents.lifeCycleRuntimeKtx
     implementation config.androidArchitectureComponents.lifecyleViewModel
     // Coroutines
-    implementation config.commonDependency.coroutines
+    implementation config.backgroundAndAsynThreading.coroutines
+    //Work Manager
+    implementation config.backgroundAndAsynThreading.workManager
     // Navigation Component
     implementation config.navigationDependency.navFragment
     implementation config.navigationDependency.navKtx

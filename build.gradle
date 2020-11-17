@@ -65,16 +65,20 @@ ext {
     quickpermissionsVersion = '0.4.0'
     localizationVersion = '1.2.5'
     textSize = "1.0.6"
+    work_version = "2.4.0"
     commonDependency = [
             ktx_core     : "androidx.core:core-ktx:${ktx_core}",
             multidex     : "com.android.support:multidex:${multidex}",
             appcompat    : "androidx.appcompat:appcompat:${appcompat}",
             dataBinding  : "com.android.databinding:compiler:${databinding}",
             gson         : "com.google.code.gson:gson:${gson}",
-            coroutines   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}",
             activityKtx  : "androidx.activity:activity-ktx:${activityKtx}",
             dataStorePref: "androidx.datastore:datastore-preferences:${dataStorePref}",
             otto         : "com.squareup:otto:${otto}"
+    ]
+    backgroundAndAsynThreading=[
+            coroutines   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}",
+            workManager: "androidx.work:work-runtime-ktx:${work_version}"
     ]
     retrofitDependency = [
             retrofit2             : "com.squareup.retrofit2:retrofit:${retrofit2}",

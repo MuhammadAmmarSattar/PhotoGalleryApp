@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,8 +13,19 @@
             android:id="@+id/mainRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            tools:itemCount="3"
             tools:listitem="@layout/item_example_row"/>
 
-    </FrameLayout>
+        <Button
+            android:id="@+id/btn_wm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="start work Manger"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_20sdp"/>
+
+    </RelativeLayout>
 
 </layout>

@@ -4,9 +4,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.WorkInfo
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoDTO
 import com.daniyal.basicappimpl.databinding.FragmentSplashBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
@@ -18,6 +20,7 @@ import com.daniyal.basicappimpl.ui.home.viewmodels.MainViewModel
 import com.xwray.groupie.ExpandableGroup
 import com.xwray.groupie.Section
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_splash.*
 import java.util.*
 
@@ -42,13 +45,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         PhotoDTO("3", "this is description 3", 23),
         PhotoDTO("4", "this is description 4", 24),
     )
-
     var mainViewItemList:MutableList<MainViewItem> = mutableListOf()
-//    var fancyItemList: MutableList<FancyItem> = mutableListOf()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         subscribeUiEvents(mainViewModel)
         setupRecyclerView(photoDTOs)
 
@@ -59,6 +59,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 
 
     private fun setupRecyclerView(items: List<PhotoDTO>) {
+        mainViewModel.outputWorkInfos.observe(viewLifecycleOwner, workInfosObserver())
+        binding.btnWm.setOnClickListener { mainViewModel.applyCompression() }
+
         linearLayoutManager = LinearLayoutManager(activity)
         mainRv.apply {
             layoutManager = GridLayoutManager(activity, groupAdapter.spanCount).apply {
@@ -67,10 +70,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
             adapter = groupAdapter
         }
 
+
         items.forEach { photoDTO ->
             mainViewItemList.add(MainViewItem(photoDTO, this))
         }
-
 
 
         ExpandableGroup(MainExpendableHeaderItem("Boring Group"), true).apply {
@@ -85,10 +88,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 //            excitingSection.addAll(excitingFancyItems)
 //            add(excitingSection)
 //            groupAdapter.add(this)
-            add(Section(mainViewItemList))
+            excitingSection.addAll(mainViewItemList)
+            add(excitingSection)
             groupAdapter.add(this)
         }
-
 
     }
 
@@ -112,7 +115,18 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 //        delay(3000)
 //        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
 //    }
+    private fun workInfosObserver():androidx.lifecycle.Observer<List<WorkInfo>>{
+        return androidx.lifecycle.Observer{listOfWorkInfo->
 
+            if(listOfWorkInfo.isNullOrEmpty()){return@Observer}
+            if(listOfWorkInfo[0].state.isFinished){
+                mainViewModel.showToast("Work is Finished")
+            }else{
+                mainViewModel.showToast("Work In Progress")
+            }
+        }
+
+    }
 
     private fun generateFancyItems(count: Int): MutableList<FancyItem>{
         val rnd = Random()

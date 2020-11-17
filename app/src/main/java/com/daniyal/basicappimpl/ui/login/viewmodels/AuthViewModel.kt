@@ -11,7 +11,7 @@ import com.daniyal.basicappimpl.data.repository.photo.local.Photo
 import com.daniyal.basicappimpl.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class AuthViewModel @ViewModelInject constructor(private val photoRepository: PhotoRepository):BaseViewModel() {
+class AuthViewModel @ViewModelInject constructor(application: Application,private val photoRepository: PhotoRepository):BaseViewModel(application) {
 
     private val _photos:MutableLiveData<Result<List<Photo>>> = MutableLiveData()
      val photos:LiveData<Result<List<Photo>>> = _photos

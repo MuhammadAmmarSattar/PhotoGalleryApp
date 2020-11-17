@@ -1,20 +1,16 @@
 package com.daniyal.basicappimpl.ui.home
 
-import android.Manifest
+//import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
-import com.bumptech.glide.RequestManager
+import androidx.work.WorkInfo
 import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.ui.base.BaseAuthenticationActivity
 import com.daniyal.basicappimpl.ui.home.viewmodels.MainViewModel
-import com.daniyal.basicappimpl.utils.LocaleContainer
-//import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
@@ -23,6 +19,7 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
     override fun baseOnCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
+
         subscribeUiEvents(mainViewModel)
 
     }
@@ -40,4 +37,5 @@ class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
 //            }
 //        }
     }
+
 }
