@@ -1,6 +1,7 @@
 package com.daniyal.basicappimpl.ui.base
 
 import android.view.View
+import com.xwray.groupie.ExpandableItem
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 

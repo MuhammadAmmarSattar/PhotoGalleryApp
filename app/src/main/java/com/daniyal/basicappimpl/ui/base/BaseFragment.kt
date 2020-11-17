@@ -23,7 +23,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
     protected lateinit var bus: Bus
     protected lateinit var activity: Activity
     protected var customProgressDialog: ProgressDialog? = null
-    protected var groupAdapter: GroupAdapter<GroupieViewHolder>? = null
+    protected lateinit var groupAdapter: GroupAdapter<GroupieViewHolder>
 
 
     // data binding
