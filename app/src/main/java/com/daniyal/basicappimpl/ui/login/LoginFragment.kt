@@ -31,17 +31,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.onActivityCreated(savedInstanceState)
         subscribeUiEvents(authViewModel)
         subscribeToObserver()
+//        setupPagination()
     }
 
-    fun initiatePagination() {
-
+    private fun setupPagination() {
 //        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 //        recyclerView.adapter = pagingAdapter
-//        lifecycleScope.launch {
-//            authViewModel.getPaginatedPhotos().collectLatest { pagingData ->
-//                pagingAdapter.submitData(pagingData)
+//        authViewModel.photosPagination.observe(viewLifecycleOwner, {
+//            lifecycleScope.launch {
+//                pagingAdapter.submitData(it)
 //            }
-//        }
+//        })
     }
 
     fun subscribeToObserver() {

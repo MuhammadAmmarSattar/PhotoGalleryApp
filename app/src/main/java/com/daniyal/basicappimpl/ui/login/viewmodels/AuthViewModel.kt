@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -19,6 +20,8 @@ class AuthViewModel @ViewModelInject constructor(
     private val photoRepository: PhotoRepository
 ) : BaseViewModel(application) {
 
+    lateinit var photosPagination: LiveData<PagingData<Photo>>
+
     private val _photos: MutableLiveData<Result<List<Photo>>> = MutableLiveData()
     val photos: LiveData<Result<List<Photo>>> = _photos
 
@@ -27,9 +30,11 @@ class AuthViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             _photos.value = photoRepository.getPhotos()
         }
-    }
 
-    fun getPaginatedPhotos(): Flow<PagingData<Photo>> =
-        photoRepository.getPaginatedPhotos().cachedIn(viewModelScope)
+        photosPagination =
+            photoRepository.getPaginatedPhotos()
+                .cachedIn(viewModelScope)
+                .asLiveData()
+    }
 
 }
