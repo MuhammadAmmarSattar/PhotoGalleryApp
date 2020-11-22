@@ -36,6 +36,8 @@ class MainViewModel @ViewModelInject constructor(application: Application) : Bas
         // Add WorkRequest to image Compression work.
         val imgCompressionBuilder = OneTimeWorkRequestBuilder<ImagesCompressionWorker>()
             .setInputData(createInputDataForUri())
+            .addTag(TAG_OUTPUT)
+
         // network constraint
         val networkConstraint =Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)

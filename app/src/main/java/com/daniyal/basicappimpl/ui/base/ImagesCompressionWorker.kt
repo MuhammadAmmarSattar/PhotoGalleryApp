@@ -3,6 +3,7 @@ package com.daniyal.basicappimpl.ui.base
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
+import androidx.work.Data
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -20,11 +21,13 @@ class ImagesCompressionWorker(ctx: Context, params: WorkerParameters) : Worker(c
         makeStatusNotification(message = "Image Compression start Working", context = applicationContext)
         sleep()
          return try {
-                for(i in 0..10){
+                for(i in 0..3   ){
                     Log.d(TAG, "do Compression Work:  $i")
                     Thread.sleep(1000)
                 }
-            Result.success()
+             val dataObj = Data.Builder()
+             dataObj.putString("op","success ImageCompressionWokrer")
+            Result.success(dataObj.build())
         }catch (exception:Exception){
             Result.failure()
         }

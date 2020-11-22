@@ -15,7 +15,7 @@ class ImagesUploadingWorker(ctx: Context,params:WorkerParameters):Worker(ctx,par
         makeStatusNotification(message = "Image Uploading...", context = applicationContext)
         sleep()
         return try {
-            for(i in 0..10){
+            for(i in 0..3){
                 Log.d(ContentValues.TAG, "do Image Uploading work: $i")
                 Thread.sleep(1000)
             }

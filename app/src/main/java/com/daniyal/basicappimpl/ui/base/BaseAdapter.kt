@@ -13,4 +13,5 @@ abstract class BaseAdapter(private val resLayout: Int) : Item<GroupieViewHolder>
     }
 
     protected abstract fun initBinding(viewHolder: View, position: Int)
+
 }

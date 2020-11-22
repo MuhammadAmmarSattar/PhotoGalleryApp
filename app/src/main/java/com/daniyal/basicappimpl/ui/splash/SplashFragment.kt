@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.WorkInfo
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoDTO
@@ -41,7 +42,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         fillRecyclerView(photoDTOs)
         mainViewModel.outputWorkInfos.observe(viewLifecycleOwner, workInfosObserver())
         binding.btnWm.setOnClickListener { mainViewModel.applyCompression() }
-
     }
     private fun fillRecyclerView(items: List<PhotoDTO>) {
         items.forEach { photoDTO ->
@@ -73,14 +73,22 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 //        delay(3000)
 //        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
 //    }
-    private fun workInfosObserver():androidx.lifecycle.Observer<List<WorkInfo>>{
-        return androidx.lifecycle.Observer{listOfWorkInfo->
-
-            if(listOfWorkInfo.isNullOrEmpty()){return@Observer}
-            if(listOfWorkInfo[0].state.isFinished){
-                mainViewModel.showToast("Work is Finished")
-            }else{
-                mainViewModel.showToast("Work In Progress")
+    private fun workInfosObserver(): Observer<List<WorkInfo>> {
+        return Observer{listOfWorkInfo->
+            if (listOfWorkInfo.isNullOrEmpty()) {
+                return@Observer }
+            mainViewModel.showToast("Work is observe")
+           val workStatus =  listOfWorkInfo[0]
+            if(workStatus.state.isFinished){
+                    mainViewModel.showToast("work is finished")
+                val outputImageUri = workStatus.outputData.getString("op")
+                if(!outputImageUri.isNullOrEmpty()){
+                    mainViewModel.showToast(outputImageUri)
+                }else {
+                    mainViewModel.showToast("in progress")
+                }
+            }else {
+                mainViewModel.showToast("not Finished")
             }
         }
 
