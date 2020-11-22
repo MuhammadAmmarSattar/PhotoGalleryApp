@@ -20,8 +20,8 @@ class AuthViewModel @ViewModelInject constructor(
     private val photoRepository: PhotoRepository
 ) : BaseViewModel(application) {
 
-    private val _photos: MutableLiveData<Result<List<Photo>>> = MutableLiveData()
-    val photos: LiveData<Result<List<Photo>>> = _photos
+    private val _photos: MutableLiveData<List<Photo>> = MutableLiveData()
+    val photos: LiveData<List<Photo>> = _photos
 
     private val _photosPagination: MutableLiveData<PagingData<Photo>> = MutableLiveData()
     val photosPagination: LiveData<PagingData<Photo>> = _photosPagination
@@ -29,22 +29,32 @@ class AuthViewModel @ViewModelInject constructor(
 
     init {
         viewModelScope.launch {
-//            _photos.value = photoRepository.getPhotos()
 
-            val result = photoRepository.getPaginatedPhotos()
+            val result = photoRepository.getPhotos()
             when (result) {
                 is Result.Success -> {
-                    result.data
-                        .cachedIn(viewModelScope)
-                        .collectLatest {
-                            _photosPagination.value = it
-                        }
-
+                    _photos.value = result.data
                 }
-                is Result.Error -> {
-                    Timber.e(result.exception.message)
+                is Result.Failure -> {
+                    handleApiError(result)
                 }
             }
+
+            //pagination
+//            val result = photoRepository.getPaginatedPhotos()
+//            when (result) {
+//                is Result.Success -> {
+//                    result.data
+//                        .cachedIn(viewModelScope)
+//                        .collectLatest {
+//                            _photosPagination.value = it
+//                        }
+//
+//                }
+//                is Result.Error -> {
+//                    Timber.e(result.exception.message)
+//                }
+//            }
 
         }
 
