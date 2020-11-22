@@ -9,6 +9,7 @@ import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoDTO
 import com.daniyal.basicappimpl.data.repository.photo.remote.service.PhotoService
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import com.daniyal.basicappimpl.data.Result
 
 class PhotoRDS @Inject constructor(private val photoService: PhotoService) : BaseRDS() {
 
@@ -16,11 +17,14 @@ class PhotoRDS @Inject constructor(private val photoService: PhotoService) : Bas
         photoService.getPhotos(GetPhotoRequest())
     }
 
-    fun getPaginatedPhotos(): Flow<PagingData<PhotoDTO>> {
-        return Pager(
-            config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = { PhotoPagingSource(photoService) }
-        ).flow
+    suspend fun getPaginatedPhotos(): Result<Flow<PagingData<PhotoDTO>>> {
+        return safeApiCall {
+            Pager(
+                config = PagingConfig(pageSize = 10),
+                pagingSourceFactory = { PhotoPagingSource(photoService) }
+            ).flow
+        }
+
     }
 //
 //    suspend fun getPhotos(): Result<PhotosResponse> {

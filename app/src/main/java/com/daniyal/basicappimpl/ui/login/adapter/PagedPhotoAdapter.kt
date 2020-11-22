@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.basearchitecture.common.repository.photo.local.Photo
-import com.example.basearchitecture.databinding.PhotoItemBinding
+import com.daniyal.basicappimpl.data.repository.photo.local.Photo
+import com.daniyal.basicappimpl.databinding.PhotoItemBinding
 
 class PagedPhotoAdapter(diffCallback: DiffUtil.ItemCallback<Photo> = UserComparator) :
     PagingDataAdapter<Photo, PagedPhotoAdapter.PhotoViewHolder>(diffCallback) {

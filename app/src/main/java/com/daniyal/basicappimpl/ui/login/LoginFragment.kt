@@ -12,6 +12,7 @@ import com.daniyal.basicappimpl.ui.base.BaseFragment
 import com.daniyal.basicappimpl.ui.login.adapter.PagedPhotoAdapter
 import com.daniyal.basicappimpl.ui.login.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -31,17 +32,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.onActivityCreated(savedInstanceState)
         subscribeUiEvents(authViewModel)
         subscribeToObserver()
-//        setupPagination()
+        setupPagination()
     }
 
     private fun setupPagination() {
-//        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        recyclerView.adapter = pagingAdapter
-//        authViewModel.photosPagination.observe(viewLifecycleOwner, {
-//            lifecycleScope.launch {
-//                pagingAdapter.submitData(it)
-//            }
-//        })
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.adapter = pagingAdapter
+        authViewModel.photosPagination.observe(viewLifecycleOwner, {
+            lifecycleScope.launch {
+                pagingAdapter.submitData(it)
+            }
+        })
     }
 
     fun subscribeToObserver() {
