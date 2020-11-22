@@ -1,15 +1,31 @@
 package com.daniyal.basicappimpl.data.repository.photo.remote
+
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.daniyal.basicappimpl.data.repository.base.BaseRDS
 import com.daniyal.basicappimpl.data.repository.photo.remote.request.GetPhotoRequest
+import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoDTO
 import com.daniyal.basicappimpl.data.repository.photo.remote.service.PhotoService
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import com.daniyal.basicappimpl.data.Result
 
-class PhotoRDS @Inject constructor(private val photoService: PhotoService):BaseRDS() {
+class PhotoRDS @Inject constructor(private val photoService: PhotoService) : BaseRDS() {
 
-    suspend fun getPhotos()=safeApiCall {
+    suspend fun getPhotos() = safeApiCall {
         photoService.getPhotos(GetPhotoRequest())
     }
 
+    suspend fun getPaginatedPhotos(): Result<Flow<PagingData<PhotoDTO>>> {
+        return safeApiCall {
+            Pager(
+                config = PagingConfig(pageSize = 10),
+                pagingSourceFactory = { PhotoPagingSource(photoService) }
+            ).flow
+        }
+
+    }
 //
 //    suspend fun getPhotos(): Result<PhotosResponse> {
 //        return withContext(Dispatchers.IO) {

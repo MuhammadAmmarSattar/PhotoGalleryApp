@@ -65,6 +65,7 @@ ext {
     quickpermissionsVersion = '0.4.0'
     localizationVersion = '1.2.5'
     textSize = "1.0.6"
+    paging3 = "3.0.0-alpha09"
     work_version = "2.4.0"
     commonDependency = [
             ktx_core     : "androidx.core:core-ktx:${ktx_core}",
@@ -76,8 +77,8 @@ ext {
             dataStorePref: "androidx.datastore:datastore-preferences:${dataStorePref}",
             otto         : "com.squareup:otto:${otto}"
     ]
-    backgroundAndAsynThreading=[
-            coroutines   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}",
+    backgroundAndAsynThreading = [
+            coroutines : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}",
             workManager: "androidx.work:work-runtime-ktx:${work_version}"
     ]
     retrofitDependency = [
@@ -137,5 +138,11 @@ ext {
             localization    : "com.akexorcist:localization:$localizationVersion",
             ssp             : "com.intuit.ssp:ssp-android:$textSize",
             sdp             : "com.intuit.sdp:sdp-android:$textSize"
+    ]
+
+    paging3 = [
+            // paging3
+            pagingRuntime   : "androidx.paging:paging-runtime:${paging3}",
+            pagingRuntimeKtx: "androidx.paging:paging-runtime-ktx:${paging3}"
     ]
 }

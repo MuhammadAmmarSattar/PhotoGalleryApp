@@ -1,12 +1,12 @@
 package com.daniyal.basicappimpl.data.repository.photo.remote.service
 
-import com.daniyal.basicappimpl.data.Result
 import com.daniyal.basicappimpl.data.repository.photo.remote.request.GetPhotoRequest
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoResponse
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotosResponse
-import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface PhotoService {
 
@@ -16,4 +16,8 @@ interface PhotoService {
 
     @POST("/decrypted/photos")
     suspend fun getPhotos(@Body getPhotoRequest: GetPhotoRequest): PhotosResponse
+
+
+    @GET("/photos")
+    suspend fun getPhotos(@Query("page") page: Int): PhotosResponse
 }

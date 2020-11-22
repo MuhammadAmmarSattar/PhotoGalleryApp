@@ -23,14 +23,18 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
     protected lateinit var bus: Bus
     protected lateinit var activity: Activity
     protected var customProgressDialog: ProgressDialog? = null
-    protected var groupAdapter: GroupAdapter<GroupieViewHolder>? = null
+    protected lateinit var groupAdapter: GroupAdapter<GroupieViewHolder>
+
+
     // data binding
     private lateinit var dataBinding: DB
     protected val binding get() = dataBinding
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = (context as Activity)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         application = activity.application as ApplicationEntry
@@ -39,7 +43,10 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
         isBusRegistered = true
         customProgressDialog = ProgressDialog(activity)
         groupAdapter= GroupAdapter()
+
+
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,20 +55,26 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
         dataBinding = getFragmentBinding(inflater, container)
         return dataBinding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //ViewModel is set as Binding Variable
         dataBinding.apply { lifecycleOwner = viewLifecycleOwner }
     }
+
     protected abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): DB
+
+
     override fun onDestroy() {
         super.onDestroy()
         if (isBusRegistered) {
             bus.unregister(this)
             isBusRegistered = false
         }
-        groupAdapter?.clear()
+        groupAdapter.clear()
+
     }
+
     fun subscribeUiEvents(baseViewModel: BaseViewModel) {
         baseViewModel.uiEvents.observe(viewLifecycleOwner, {
             it.getContentIfNotHandled()
@@ -80,4 +93,6 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
                 }
         })
     }
+
+
 }

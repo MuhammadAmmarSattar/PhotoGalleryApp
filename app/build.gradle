@@ -98,6 +98,8 @@ dependencies {
     implementation config.commonDependency.multidex
     implementation config.commonDependency.appcompat
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     //Databinding Compiler
     kapt config.commonDependency.dataBinding
     //RetroFit Networking
@@ -167,6 +169,9 @@ dependencies {
     implementation config.ui_design.ssp
     //for screen size
     implementation config.ui_design.sdp
+    //paging3
+    implementation config.paging3.pagingRuntime
+    implementation config.paging3.pagingRuntimeKtx
 
 
 }
