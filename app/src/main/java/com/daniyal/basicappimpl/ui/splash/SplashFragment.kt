@@ -1,11 +1,9 @@
 package com.daniyal.basicappimpl.ui.splash
-
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.WorkInfo
@@ -39,7 +37,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
     private val mainViewModel: MainViewModel by viewModels()
 
 //        val excitingFancyItems = generateFancyItems(12)
-
     var photoDTOs: List<PhotoDTO> = listOf(
         PhotoDTO("1", "this is description 1", 21),
         PhotoDTO("2", "this is description 2", 22),
@@ -52,22 +49,11 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         super.onActivityCreated(savedInstanceState)
         subscribeUiEvents(mainViewModel)
         setupRecyclerView(photoDTOs)
-        fillRecyclerView(photoDTOs)
-
     }
-
-
     private fun setupRecyclerView(items: List<PhotoDTO>) {
         mainViewModel.outputWorkInfos.observe(viewLifecycleOwner, workInfosObserver())
         binding.btnWm.setOnClickListener { mainViewModel.applyCompression() }
 
-    }
-    private fun fillRecyclerView(items: List<PhotoDTO>) {
-        items.forEach { photoDTO ->
-            groupAdapter?.add(MainViewItem(photoDTO, this))
-        }
-    }
-    private fun setupRecyclerView() {
         linearLayoutManager = LinearLayoutManager(activity)
         mainRv.apply {
             layoutManager = GridLayoutManager(activity, groupAdapter.spanCount).apply {
@@ -75,19 +61,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
             }
             adapter = groupAdapter
         }
-
-
-//        items.forEach { photoDTO ->
-//            mainViewItemList.add(MainViewItem(photoDTO, this))
-//        }
-
-
+        items.forEach { photoDTO ->
+            mainViewItemList.add(MainViewItem(photoDTO, this))
+        }
         ExpandableGroup(MainExpendableHeaderItem("Boring Group"), true).apply {
             add(Section(mainViewItemList))
             groupAdapter.add(this)
-
         }
-
         ExpandableGroup(MainExpendableHeaderItem("Exciting Group"), false).apply {
 //            excitingSection.addAll(excitingFancyItems)
 //            add(excitingSection)
@@ -110,13 +90,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 //
 //
 //   }
-//
 //    private suspend fun navigate(){
 //        delay(3000)
 //        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
 //    }
-    private fun workInfosObserver(): Observer<List<WorkInfo>> {
-        return Observer{listOfWorkInfo->
+
+    private fun workInfosObserver():androidx.lifecycle. Observer<List<WorkInfo>> {
+        return androidx.lifecycle. Observer{listOfWorkInfo->
             if (listOfWorkInfo.isNullOrEmpty()) {
                 return@Observer }
             mainViewModel.showToast("Work is observe")
