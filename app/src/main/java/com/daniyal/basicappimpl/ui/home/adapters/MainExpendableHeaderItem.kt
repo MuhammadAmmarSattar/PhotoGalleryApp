@@ -28,6 +28,10 @@ class MainExpendableHeaderItem(private val title: String) : BaseAdapter(R.layout
 
     }
 
+    override fun initBinding(viewHolder: View, position: Int) {
+        TODO("Not yet implemented")
+    }
+
     override fun setExpandableGroup(onToggleListener: ExpandableGroup) {
         expandableGroup = onToggleListener
     }

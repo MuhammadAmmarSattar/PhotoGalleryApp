@@ -14,20 +14,19 @@ class MainViewItem(
 ) : BaseAdapter(R.layout.item_example_row) {
 
     override fun initBinding(viewHolder: GroupieViewHolder, position: Int) {
-
         viewHolder.apply {
             root.title.text = photo.desc
             root?.let {
-
-               
                 it.setOnLongClickListener {
                     groupieInterface.invokeOnLongItemClick(viewHolder.item)
                     true
                 }
             }
         }
+    }
 
-
+    override fun initBinding(viewHolder: View, position: Int) {
+        TODO("Not yet implemented")
     }
 
 

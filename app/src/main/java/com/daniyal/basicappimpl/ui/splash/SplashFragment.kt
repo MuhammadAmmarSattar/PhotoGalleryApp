@@ -52,6 +52,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         super.onActivityCreated(savedInstanceState)
         subscribeUiEvents(mainViewModel)
         setupRecyclerView(photoDTOs)
+        fillRecyclerView(photoDTOs)
 
     }
 
@@ -76,9 +77,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         }
 
 
-        items.forEach { photoDTO ->
-            mainViewItemList.add(MainViewItem(photoDTO, this))
-        }
+//        items.forEach { photoDTO ->
+//            mainViewItemList.add(MainViewItem(photoDTO, this))
+//        }
 
 
         ExpandableGroup(MainExpendableHeaderItem("Boring Group"), true).apply {
@@ -86,9 +87,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
             groupAdapter.add(this)
 
         }
-
-
-
 
         ExpandableGroup(MainExpendableHeaderItem("Exciting Group"), false).apply {
 //            excitingSection.addAll(excitingFancyItems)

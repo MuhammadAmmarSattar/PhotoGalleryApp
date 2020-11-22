@@ -19,6 +19,10 @@ class FancyItem(@ColorInt private val color: Int,
 
     }
 
+    override fun initBinding(viewHolder: View, position: Int) {
+        TODO("Not yet implemented")
+    }
+
 
     override fun getSpanSize(spanCount: Int, position: Int) = spanCount / 3
 }
