@@ -10,8 +10,8 @@ abstract class BaseAdapter(private val resLayout: Int) : Item<GroupieViewHolder>
     override fun getLayout() = resLayout
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        initBinding(viewHolder.itemView, position)
+        initBinding(viewHolder, position)
     }
 
-    protected abstract fun initBinding(viewHolder: View, position: Int)
+    protected abstract fun initBinding(viewHolder: GroupieViewHolder, position: Int)
 }

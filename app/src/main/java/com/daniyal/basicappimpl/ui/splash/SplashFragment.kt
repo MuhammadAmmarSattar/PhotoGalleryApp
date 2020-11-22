@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,9 +17,10 @@ import com.daniyal.basicappimpl.ui.home.adapters.MainExpendableHeaderItem
 import com.daniyal.basicappimpl.ui.home.adapters.MainViewItem
 import com.daniyal.basicappimpl.ui.home.viewmodels.MainViewModel
 import com.xwray.groupie.ExpandableGroup
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.Item
 import com.xwray.groupie.Section
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_splash.*
 import java.util.*
 
@@ -45,7 +45,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         PhotoDTO("3", "this is description 3", 23),
         PhotoDTO("4", "this is description 4", 24),
     )
-    var mainViewItemList:MutableList<MainViewItem> = mutableListOf()
+    var mainViewItemList: MutableList<MainViewItem> = mutableListOf()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -53,9 +53,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         setupRecyclerView(photoDTOs)
 
     }
-
-
-
 
 
     private fun setupRecyclerView(items: List<PhotoDTO>) {
@@ -79,6 +76,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         ExpandableGroup(MainExpendableHeaderItem("Boring Group"), true).apply {
             add(Section(mainViewItemList))
             groupAdapter.add(this)
+
         }
 
 
@@ -91,15 +89,11 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
             excitingSection.addAll(mainViewItemList)
             add(excitingSection)
             groupAdapter.add(this)
+
         }
 
     }
 
-
-
-    override fun invokeSingleItemClick(item: PhotoDTO, position: Int) {
-        mainViewModel.showToast("${item.desc} - ${position}")
-    }
 
     //
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,26 +109,42 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 //        delay(3000)
 //        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
 //    }
-    private fun workInfosObserver():androidx.lifecycle.Observer<List<WorkInfo>>{
-        return androidx.lifecycle.Observer{listOfWorkInfo->
+    private fun workInfosObserver(): androidx.lifecycle.Observer<List<WorkInfo>> {
+        return androidx.lifecycle.Observer { listOfWorkInfo ->
 
-            if(listOfWorkInfo.isNullOrEmpty()){return@Observer}
-            if(listOfWorkInfo[0].state.isFinished){
+            if (listOfWorkInfo.isNullOrEmpty()) {
+                return@Observer
+            }
+            if (listOfWorkInfo[0].state.isFinished) {
                 mainViewModel.showToast("Work is Finished")
-            }else{
+            } else {
                 mainViewModel.showToast("Work In Progress")
             }
         }
 
     }
 
-    private fun generateFancyItems(count: Int): MutableList<FancyItem>{
+    private fun generateFancyItems(count: Int): MutableList<FancyItem> {
         val rnd = Random()
-        return MutableList(count){
-            val color = Color.argb(255, rnd.nextInt(256),
-                rnd.nextInt(256), rnd.nextInt(256))
+        return MutableList(count) {
+            val color = Color.argb(
+                255, rnd.nextInt(256),
+                rnd.nextInt(256), rnd.nextInt(256)
+            )
             FancyItem(color, rnd.nextInt(100))
         }
+    }
+
+
+    override fun invokeSingleItemClick(item: Item<GroupieViewHolder>) {
+
+
+    }
+
+    override fun invokeOnLongItemClick(item: Item<GroupieViewHolder>) {
+        mainViewModel.showToast(
+            "${groupAdapter.getAdapterPosition(item)}"
+        )
     }
 
 

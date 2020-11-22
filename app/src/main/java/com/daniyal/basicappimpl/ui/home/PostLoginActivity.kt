@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 @AndroidEntryPoint
-class MainActivity : BaseAuthenticationActivity() , View.OnClickListener{
+class PostLoginActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
     private val mainViewModel: MainViewModel by viewModels()
 
