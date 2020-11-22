@@ -1,12 +1,16 @@
 package com.daniyal.basicappimpl.ui.splash
+
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.WorkInfo
+import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoDTO
 import com.daniyal.basicappimpl.databinding.FragmentSplashBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
@@ -21,10 +25,12 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.Section
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_splash.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
 @AndroidEntryPoint
-class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<PhotoDTO> {
+class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val excitingSection = Section()
 
@@ -36,7 +42,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 
     private val mainViewModel: MainViewModel by viewModels()
 
-//        val excitingFancyItems = generateFancyItems(12)
+    //        val excitingFancyItems = generateFancyItems(12)
     var photoDTOs: List<PhotoDTO> = listOf(
         PhotoDTO("1", "this is description 1", 21),
         PhotoDTO("2", "this is description 2", 22),
@@ -49,7 +55,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         super.onActivityCreated(savedInstanceState)
         subscribeUiEvents(mainViewModel)
         setupRecyclerView(photoDTOs)
+
     }
+
     private fun setupRecyclerView(items: List<PhotoDTO>) {
         mainViewModel.outputWorkInfos.observe(viewLifecycleOwner, workInfosObserver())
         binding.btnWm.setOnClickListener { mainViewModel.applyCompression() }
@@ -64,7 +72,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
         items.forEach { photoDTO ->
             mainViewItemList.add(MainViewItem(photoDTO, this))
         }
-        ExpandableGroup(MainExpendableHeaderItem("Boring Group"), true).apply {
+        ExpandableGroup(MainExpendableHeaderItem("Boring Group"), false).apply {
             add(Section(mainViewItemList))
             groupAdapter.add(this)
         }
@@ -78,38 +86,36 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            navigate()
+        }
+
     }
 
 
-    //
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        viewLifecycleOwner.lifecycleScope.launch {
-//           navigate()
-//       }
-//
-//
-//   }
-//    private suspend fun navigate(){
-//        delay(3000)
-//        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
-//    }
 
-    private fun workInfosObserver():androidx.lifecycle. Observer<List<WorkInfo>> {
-        return androidx.lifecycle. Observer{listOfWorkInfo->
+
+    private suspend fun navigate(){
+        delay(3000)
+        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
+    }
+
+    private fun workInfosObserver(): androidx.lifecycle.Observer<List<WorkInfo>> {
+        return androidx.lifecycle.Observer { listOfWorkInfo ->
             if (listOfWorkInfo.isNullOrEmpty()) {
-                return@Observer }
+                return@Observer
+            }
             mainViewModel.showToast("Work is observe")
-           val workStatus =  listOfWorkInfo[0]
-            if(workStatus.state.isFinished){
-                    mainViewModel.showToast("work is finished")
+            val workStatus = listOfWorkInfo[0]
+            if (workStatus.state.isFinished) {
+                mainViewModel.showToast("work is finished")
                 val outputImageUri = workStatus.outputData.getString("op")
-                if(!outputImageUri.isNullOrEmpty()){
+                if (!outputImageUri.isNullOrEmpty()) {
                     mainViewModel.showToast(outputImageUri)
-                }else {
+                } else {
                     mainViewModel.showToast("in progress")
                 }
-            }else {
+            } else {
                 mainViewModel.showToast("not Finished")
             }
         }
@@ -129,7 +135,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface<P
 
 
     override fun invokeSingleItemClick(item: Item<GroupieViewHolder>) {
-
 
     }
 

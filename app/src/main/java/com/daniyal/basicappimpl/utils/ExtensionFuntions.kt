@@ -29,6 +29,13 @@ fun <A : Activity> Activity.startNewActivity(activity: Class<A>) {
         startActivity(it)
     }
 }
+fun <A : Activity> Activity.killSessionAndStartNewActivity(activity: Class<A>) {
+    Intent(this, activity).also {
+        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(it)
+        finish()
+    }
+}
 
 
 fun View.snackbar(message:String,action:(()->Unit)?=null){

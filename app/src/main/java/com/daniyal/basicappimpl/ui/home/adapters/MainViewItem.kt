@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_example_row.view.*
 
 class MainViewItem(
     private val photo: PhotoDTO,
-    private val groupieInterface: GroupieInterface<PhotoDTO>
+    private val groupieInterface: GroupieInterface
 ) : BaseAdapter(R.layout.item_example_row) {
 
     override fun initBinding(viewHolder: GroupieViewHolder, position: Int) {

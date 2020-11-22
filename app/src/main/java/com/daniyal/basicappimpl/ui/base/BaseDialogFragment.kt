@@ -3,21 +3,37 @@ package com.daniyal.basicappimpl.ui.base
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.squareup.otto.Bus
 
-abstract class BaseDialogFragment : DialogFragment() {
+abstract class BaseDialogFragment<DB : ViewDataBinding> : DialogFragment() {
     protected lateinit var application: ApplicationEntry
     protected lateinit var bus: Bus
     protected lateinit var activity: Activity
-    protected var isBusRegistered: Boolean = false
+    private var isBusRegistered: Boolean = false
+    private lateinit var dataBinding: DB
+    protected val binding get() = dataBinding
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity = (context as Activity)
+    }
+
+    protected abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): DB
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        dataBinding = getFragmentBinding(inflater, container)
+        return dataBinding.root
     }
 
 
@@ -34,15 +50,6 @@ abstract class BaseDialogFragment : DialogFragment() {
         if (isBusRegistered) {
             bus.unregister(this)
             isBusRegistered = false
-        }
-    }
-
-
-    override fun onActivityCreated(arg0: Bundle?) {
-        super.onActivityCreated(arg0)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            Objects.requireNonNull<Window>(dialog?.window)
-//                .getAttributes().windowAnimations = R.style.MyAnimation_Window
         }
     }
 
