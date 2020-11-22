@@ -1,11 +1,9 @@
-package com.daniyal.basicappimpl.ui.home.viewmodels
+package com.daniyal.basicappimpl.ui.postLogin
 
 import android.app.Application
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
-import android.provider.ContactsContract
-import androidx.datastore.preferences.protobuf.LazyStringArrayList
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.work.*
@@ -23,10 +21,10 @@ class MainViewModel @ViewModelInject constructor(application: Application) : Bas
 
     init {
         outputWorkInfos = workManager.getWorkInfosByTagLiveData(TAG_OUTPUT)
-        showLoader(true)
-        Handler(Looper.getMainLooper()).postDelayed({
-            showLoader(false)
-        }, 5000)
+//        showLoader(true)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            showLoader(false)
+//        }, 5000)
     }
 
     internal fun cancelWork() {

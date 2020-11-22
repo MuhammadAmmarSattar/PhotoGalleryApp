@@ -1,4 +1,4 @@
-package com.daniyal.basicappimpl.ui.login
+package com.daniyal.basicappimpl.ui.preLogin
 
 import android.os.Bundle
 import com.daniyal.basicappimpl.R
