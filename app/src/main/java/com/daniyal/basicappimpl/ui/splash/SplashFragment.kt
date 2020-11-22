@@ -1,20 +1,20 @@
 package com.daniyal.basicappimpl.ui.splash
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.WorkInfo
-import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.data.repository.photo.remote.response.PhotoDTO
 import com.daniyal.basicappimpl.databinding.FragmentSplashBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
 import com.daniyal.basicappimpl.ui.callbacks.GroupieInterface
+import com.daniyal.basicappimpl.ui.home.PostLoginActivity
 import com.daniyal.basicappimpl.ui.home.adapters.FancyItem
 import com.daniyal.basicappimpl.ui.home.adapters.MainExpendableHeaderItem
 import com.daniyal.basicappimpl.ui.home.adapters.MainViewItem
@@ -93,11 +93,10 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(), GroupieInterface {
     }
 
 
-
-
-    private suspend fun navigate(){
-        delay(3000)
-        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
+    private suspend fun navigate() {
+        delay(7000)
+        startActivity(Intent(activity, PostLoginActivity::class.java))
+//        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
     }
 
     private fun workInfosObserver(): androidx.lifecycle.Observer<List<WorkInfo>> {
