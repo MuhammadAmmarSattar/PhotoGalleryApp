@@ -6,6 +6,7 @@ import com.daniyal.basicappimpl.infrastructure.ApplicationEntry
 import com.daniyal.basicappimpl.utils.ProgressDialog
 import com.daniyal.basicappimpl.utils.event.EventUtilFunctions.showAlert
 import com.daniyal.basicappimpl.utils.event.EventUtilFunctions.showLoader
+import com.daniyal.basicappimpl.utils.event.EventUtilFunctions.showSnackbar
 import com.daniyal.basicappimpl.utils.event.EventUtilFunctions.showToast
 import com.daniyal.basicappimpl.utils.event.UiEvent
 import com.squareup.otto.Bus
@@ -41,6 +42,13 @@ abstract class BaseActivity : LocalizationActivity() {
                         }
                         is UiEvent.ShowLoader -> {
                             showLoader(event.show, customProgressDialog)
+                        }
+                        is UiEvent.ShowSnackbar -> {
+                            showSnackbar(
+                                findViewById(android.R.id.content),
+                                event.message,
+                                event.action
+                            )
                         }
                     }
                 }

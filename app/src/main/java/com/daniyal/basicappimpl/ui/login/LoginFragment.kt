@@ -6,15 +6,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.daniyal.basicappimpl.data.Result
 import com.daniyal.basicappimpl.databinding.FragmentLoginBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
 import com.daniyal.basicappimpl.ui.login.adapter.PagedPhotoAdapter
 import com.daniyal.basicappimpl.ui.login.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -48,15 +47,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     fun subscribeToObserver() {
         authViewModel.photos.observe(viewLifecycleOwner) {
-            when (it) {
-                is Result.Success -> {
-                    it.data
-                }
-                is Result.Failure -> {
-
-                }
-            }
-
+            Timber.e("Size :%s", it.size)
         }
     }
 

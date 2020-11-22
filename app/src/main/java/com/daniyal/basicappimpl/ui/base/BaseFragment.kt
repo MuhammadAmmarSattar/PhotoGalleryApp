@@ -1,5 +1,6 @@
 package com.daniyal.basicappimpl.ui.base
 
+import android.R
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -42,7 +43,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
         bus.register(this)
         isBusRegistered = true
         customProgressDialog = ProgressDialog(activity)
-        groupAdapter= GroupAdapter()
+        groupAdapter = GroupAdapter()
 
 
     }
@@ -88,6 +89,13 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() {
                         }
                         is UiEvent.ShowLoader -> {
                             EventUtilFunctions.showLoader(event.show, customProgressDialog)
+                        }
+                        is UiEvent.ShowSnackbar -> {
+                            EventUtilFunctions.showSnackbar(
+                                requireView(),
+                                event.message,
+                                event.action
+                            )
                         }
                     }
                 }
