@@ -11,6 +11,7 @@ import com.daniyal.basicappimpl.utils.LocaleContainer
 import com.daniyal.basicappimpl.utils.ProgressDialog
 import com.squareup.otto.Bus
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 @HiltAndroidApp
 class ApplicationEntry : Application() {
@@ -18,6 +19,8 @@ class ApplicationEntry : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Timber.plant(Timber.DebugTree())
+
     }
 
 

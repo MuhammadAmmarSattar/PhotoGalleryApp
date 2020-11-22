@@ -169,6 +169,9 @@ dependencies {
     implementation config.ui_design.ssp
     //for screen size
     implementation config.ui_design.sdp
+    //paging3
+    implementation config.paging3.pagingRuntime
+    implementation config.paging3.pagingRuntimeKtx
 
 
 }
