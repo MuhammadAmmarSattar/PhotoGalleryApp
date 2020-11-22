@@ -19,7 +19,6 @@ class PostLoginActivity : BaseAuthenticationActivity() , View.OnClickListener{
 
     override fun baseOnCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
-
         subscribeUiEvents(mainViewModel)
 
     }
