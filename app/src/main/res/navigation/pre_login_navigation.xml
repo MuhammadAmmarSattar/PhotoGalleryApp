@@ -6,7 +6,7 @@
     app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.daniyal.basicappimpl.ui.splash.SplashFragment"
+        android:name="com.daniyal.basicappimpl.ui.preLogin.splash.SplashFragment"
         tools:layout="@layout/fragment_splash"
         android:label="fragment_splash">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.daniyal.basicappimpl.ui.login.LoginFragment"
+        android:name="com.daniyal.basicappimpl.ui.preLogin.login.LoginFragment"
         tools:layout="@layout/fragment_login"
         android:label="fragment_login" />
 </navigation>

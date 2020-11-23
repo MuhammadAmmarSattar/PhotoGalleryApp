@@ -3,4 +3,10 @@
   <color name="colorPrimary">#3F51B5</color>
   <color name="colorPrimaryDark">#303F9F</color>
   <color name="colorAccent">#FF4081</color>
+
+<!--  bottom tabs - home-->
+  <color name="tabTextColorSelected">#E34A48</color>
+  <color name="tabTextColorUnSelected">#1A1818</color>
+
+
 </resources>
