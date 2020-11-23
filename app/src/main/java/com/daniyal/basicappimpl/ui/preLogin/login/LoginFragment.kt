@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.daniyal.basicappimpl.databinding.FragmentLoginBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
+import com.daniyal.basicappimpl.ui.postLogin.PostLoginActivity
 import com.daniyal.basicappimpl.ui.preLogin.login.viewmodels.LoginViewModel
+import com.daniyal.basicappimpl.utils.killSessionAndStartNewActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -23,11 +25,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.viewmodel = loginViewModel
-
         subscribeUiEvents(loginViewModel)
+        subscribeToObservables()
     }
 
 
-//    override fun getFragmentLayout() = R.layout.fragment_login
+
+    private fun subscribeToObservables(){
+        application.auth.isLoggedIn=false
+        loginViewModel.loginStatus.observe(viewLifecycleOwner){
+            if (it){
+                application.auth.isLoggedIn=true
+                activity.killSessionAndStartNewActivity(PostLoginActivity::class.java)
+            }
+        }
+    }
 
 }
