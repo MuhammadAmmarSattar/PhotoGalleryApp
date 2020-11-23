@@ -1,7 +1,7 @@
 package com.daniyal.basicappimpl.ui.base
 
 import android.os.Bundle
-import com.daniyal.basicappimpl.ui.login.PreLoginActivity
+import com.daniyal.basicappimpl.ui.preLogin.PreLoginActivity
 import com.daniyal.basicappimpl.utils.killSessionAndStartNewActivity
 import com.daniyal.basicappimpl.utils.startNewActivity
 
