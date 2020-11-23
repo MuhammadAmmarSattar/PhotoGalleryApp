@@ -27,6 +27,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         binding.viewmodel = loginViewModel
         subscribeUiEvents(loginViewModel)
         subscribeToObservables()
+        binding.registration.setOnClickListener {
+            loginViewModel.showToast("getRegistered!")
+
+        }
+        binding.forgotPassword.setOnClickListener {
+            loginViewModel.showToast("ForgotPassword!")
+        }
     }
 
 

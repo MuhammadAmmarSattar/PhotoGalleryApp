@@ -42,14 +42,6 @@ class LoginViewModel @ViewModelInject constructor(
 
     }
 
-    fun getRegistered() {
-        showToast("getRegistered!")
-    }
-
-    fun forgotPassword() {
-        showToast("forgotPassword!")
-    }
-
 
     fun login() {
         loginStatus.value = true
