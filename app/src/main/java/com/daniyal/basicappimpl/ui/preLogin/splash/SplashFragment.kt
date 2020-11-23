@@ -29,7 +29,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     private suspend fun navigate() {
-        delay(3000)
+        delay(1000)
         startNewActivity(PostLoginActivity::class.java)
 //        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
     }
