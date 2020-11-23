@@ -22,6 +22,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        binding.viewmodel = loginViewModel
+
         subscribeUiEvents(loginViewModel)
     }
 

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import com.daniyal.basicappimpl.R
 import com.daniyal.basicappimpl.databinding.FragmentSplashBinding
 import com.daniyal.basicappimpl.ui.base.BaseFragment
-import com.daniyal.basicappimpl.ui.postLogin.PostLoginActivity
-import com.daniyal.basicappimpl.utils.startNewActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -30,8 +30,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     private suspend fun navigate() {
         delay(1000)
-        startNewActivity(PostLoginActivity::class.java)
-//        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
+        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
     }
 
 }

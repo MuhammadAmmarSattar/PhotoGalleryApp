@@ -11,6 +11,9 @@
     <string name="market_place">Marketplace</string>
     <string name="forums">Forums</string>
     <string name="notifications">Notifications</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 
 
 </resources>

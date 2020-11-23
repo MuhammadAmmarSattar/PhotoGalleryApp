@@ -67,6 +67,7 @@ ext {
     textSize = "1.0.6"
     paging3 = "3.0.0-alpha09"
     work_version = "2.4.0"
+    circle_image_version = "3.1.0"
     commonDependency = [
             ktx_core     : "androidx.core:core-ktx:${ktx_core}",
             multidex     : "com.android.support:multidex:${multidex}",
@@ -137,7 +138,9 @@ ext {
             quickPermission : "com.github.quickpermissions:quickpermissions-kotlin:${quickpermissionsVersion}",
             localization    : "com.akexorcist:localization:$localizationVersion",
             ssp             : "com.intuit.ssp:ssp-android:$textSize",
-            sdp             : "com.intuit.sdp:sdp-android:$textSize"
+            sdp             : "com.intuit.sdp:sdp-android:$textSize",
+            circleimageview : "de.hdodenhof:circleimageview:$circle_image_version"
+
     ]
 
     paging3 = [
