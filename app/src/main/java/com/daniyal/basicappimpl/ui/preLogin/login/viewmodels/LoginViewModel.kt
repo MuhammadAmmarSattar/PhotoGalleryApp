@@ -2,12 +2,14 @@ package com.daniyal.basicappimpl.ui.preLogin.login.viewmodels
 
 import android.app.Application
 import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableChar
 import androidx.databinding.ObservableField
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.daniyal.basicappimpl.ui.base.BaseViewModel
 import com.daniyal.basicappimpl.utils.AuthUtils.isEmailValid
+import com.google.android.material.textfield.TextInputEditText
 
 class LoginViewModel @ViewModelInject constructor(
     application: Application
@@ -17,11 +19,18 @@ class LoginViewModel @ViewModelInject constructor(
     var btnSelected: ObservableBoolean = ObservableBoolean(false)
 
     //Below loginStatus Flag Will be removed as per requirement
-    var _loginStatus: MutableLiveData<Boolean> = MutableLiveData()
+    private var _emailStatus: MutableLiveData<Boolean> = MutableLiveData()
+    var emailStatus: MutableLiveData<Boolean> = _emailStatus
+    private  var _passwordStatus: MutableLiveData<Boolean> = MutableLiveData()
+    var passwordStatus: MutableLiveData<Boolean> = _passwordStatus
+
+    private var _loginStatus: MutableLiveData<Boolean> = MutableLiveData()
     var loginStatus: MutableLiveData<Boolean> = _loginStatus
 
     init {
-        loginStatus.value = false
+        _loginStatus.value = false
+        _emailStatus.value = false
+        _passwordStatus.value = false
     }
 
 
@@ -30,6 +39,10 @@ class LoginViewModel @ViewModelInject constructor(
             isEmailValid(s.toString().trim()) &&
                     password.get().toString().trim().length >= 6
         )
+        _emailStatus.value = !isEmailValid(s.toString().trim())
+
+
+
 
     }
 
@@ -38,8 +51,7 @@ class LoginViewModel @ViewModelInject constructor(
             isEmailValid(email.get().toString().trim()) &&
                     s.toString().trim().length >= 6
         )
-
-
+        _passwordStatus.value = s.toString().trim().length < 6
     }
 
 

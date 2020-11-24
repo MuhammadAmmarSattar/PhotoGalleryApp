@@ -37,13 +37,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
 
-
-    private fun subscribeToObservables(){
-        application.auth.isLoggedIn=false
-        loginViewModel.loginStatus.observe(viewLifecycleOwner){
-            if (it){
-                application.auth.isLoggedIn=true
+    private fun subscribeToObservables() {
+        application.auth.isLoggedIn = false
+        loginViewModel.loginStatus.observe(viewLifecycleOwner) {
+            if (it) {
+                application.auth.isLoggedIn = true
                 activity.killSessionAndStartNewActivity(PostLoginActivity::class.java)
+            }
+        }
+
+        loginViewModel.emailStatus.observe(viewLifecycleOwner) {
+            binding.emailLayout.isErrorEnabled = false
+            if (it) {
+                binding.emailLayout.isErrorEnabled = true
+                binding.emailLayout.error = "Invalid Email."
+            }
+        }
+
+        loginViewModel.passwordStatus.observe(viewLifecycleOwner) {
+            binding.passWordLayout.isErrorEnabled = false
+            if (it) {
+                binding.passWordLayout.isErrorEnabled = true
+                binding.passWordLayout.error = "Invalid Password."
             }
         }
     }

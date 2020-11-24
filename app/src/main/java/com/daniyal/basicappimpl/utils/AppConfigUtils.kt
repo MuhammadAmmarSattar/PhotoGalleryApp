@@ -1,5 +1,7 @@
 package com.daniyal.basicappimpl.utils
 
+import android.text.TextUtils
+
 object AppConfigUtils {
     var BASE_URL = "https://jsonplaceholder.typicode.com/"
 
@@ -14,5 +16,8 @@ object AppConfigUtils {
     const val DELAY_TIME_MILLIS: Long = 3000
     const val TAG_OUTPUT = "OUTPUT"
     const val KEY_IMAGE_URI = "KEY_IMAGE_URI"
+
+
+
 
 }

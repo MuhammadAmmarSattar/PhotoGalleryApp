@@ -12,8 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -29,7 +28,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <LinearLayout
             android:id="@+id/bottomLayout"
             android:layout_width="match_parent"
@@ -40,10 +38,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,35 +52,35 @@
                     >
                     <!--                    android:onClick="@{()->viewmodel.getRegistered()}"-->
                     <TextView
+                        android:id="@+id/registration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/registration"
-                        android:layout_margin="5dp"
                         android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:text="Get Registered"
                         android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:text="Get Registered"/>
+                        android:textStyle="bold" />
                 </FrameLayout>
+
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
                     >
-<!--                    android:onClick="@{()->viewmodel.forgotPassword()}"-->
+                    <!--                    android:onClick="@{()->viewmodel.forgotPassword()}"-->
 
                     <TextView
+                        android:id="@+id/forgotPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/forgotPassword"
-                        android:layout_margin="5dp"
-                        android:textStyle="bold"
                         android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:text="Forgot Password ?"
                         android:textColor="@color/colorPrimary"
-                        android:text="Forgot Password ?"/>
+                        android:textStyle="bold" />
                 </FrameLayout>
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -103,15 +103,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:hint="@string/email"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/email"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.049">
 
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
@@ -123,7 +124,6 @@
                         android:textColor="#383838"
                         app:backgroundTint="@color/colorPrimaryDark" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
 
             </LinearLayout>
@@ -148,17 +148,20 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:hint="@string/password"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:hint="@string/password"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.049">
+
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/passwordText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
+
                         android:onTextChanged="@{viewmodel::onPasswordChanged}"
                         android:paddingStart="5dp"
                         android:paddingLeft="5dp"
@@ -169,7 +172,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
-
 
 
             <androidx.appcompat.widget.AppCompatButton
