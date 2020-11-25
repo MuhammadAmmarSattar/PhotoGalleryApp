@@ -17,5 +17,17 @@
         android:id="@+id/loginFragment"
         android:name="com.daniyal.basicappimpl.ui.preLogin.login.LoginFragment"
         tools:layout="@layout/fragment_login"
-        android:label="fragment_login" />
+        android:label="fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment2"
+            app:destination="@id/registerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment2"
+        android:name="com.daniyal.basicappimpl.ui.preLogin.login.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

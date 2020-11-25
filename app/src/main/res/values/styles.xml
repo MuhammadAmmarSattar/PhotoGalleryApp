@@ -10,6 +10,11 @@
         <!--    <item name="colorAccent">@color/colorAccent</item>-->
     </style>
 
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/LoginLayoutSuccessColor</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
 
     <style name="textTheme" parent="TextAppearance.AppCompat">
         <item name="android:textColor">#00FF00</item>
