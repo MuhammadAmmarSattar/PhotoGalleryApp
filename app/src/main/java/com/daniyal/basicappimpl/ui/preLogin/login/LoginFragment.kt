@@ -33,7 +33,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         subscribeToObservables()
 
         binding.registration.setOnClickListener {
-//            loginViewModel.showToast("getRegistered!")
             findNavController(this).navigate(R.id.action_loginFragment_to_registerFragment2)
 
         }
