@@ -8,8 +8,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IdRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.findNavController
 import com.app.projectname.infrastructure.ApplicationEntry
 import com.app.projectname.utils.ProgressDialog
 import com.app.projectname.utils.event.EventUtilFunctions
@@ -92,7 +97,7 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() ,LocationListener
                             EventUtilFunctions.showToast(event.message, activity)
                         }
                         is UiEvent.ShowLoader -> {
-                            EventUtilFunctions.showLoader(event.show, customProgressDialog)
+                            showLoader(event.show)
                         }
                         is UiEvent.ShowSnackbar -> {
                             EventUtilFunctions.showSnackbar(
@@ -101,10 +106,35 @@ abstract class BaseFragment<DB : ViewDataBinding> : Fragment() ,LocationListener
                                 event.action
                             )
                         }
+                        is UiEvent.NavigateByDirections -> {
+                            navigateByDirections(event.navDirections)
+                        }
                     }
                 }
         })
     }
 
+    fun navigateByDirections(navDirections: NavDirections) {
+        EventUtilFunctions.navigateByDirections(this, navDirections)
+    }
+    fun showLoader(show: Boolean) {
+        EventUtilFunctions.showLoader(show, customProgressDialog)
+    }
+    protected fun back() {
+        hideKeyboard(activity)
+        activity.onBackPressed()
+    }
+
+    open fun hideKeyboard(activity: Activity) {
+        val imm: InputMethodManager =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
 }

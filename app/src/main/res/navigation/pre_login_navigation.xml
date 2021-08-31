@@ -10,24 +10,41 @@
         tools:layout="@layout/fragment_splash"
         android:label="fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_splashFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.app.projectname.ui.preLogin.login.LoginFragment"
-        tools:layout="@layout/fragment_login"
-        android:label="fragment_login" >
+        tools:layout="@layout/fragment_gallery"
+        android:id="@+id/galleryFragment"
+        android:name="com.app.projectname.ui.preLogin.gallery.GalleryFragment"
+        android:label="GalleryFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment2"
-            app:destination="@id/registerFragment2" />
+            android:id="@+id/action_galleryFragment_to_searchImageFragment"
+            app:destination="@id/searchImageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registerFragment2"
-        android:name="com.app.projectname.ui.preLogin.login.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:id="@+id/searchImageFragment"
+        tools:layout="@layout/fragment_search_image"
+        android:name="com.app.projectname.ui.preLogin.gallery.search.SearchImageFragment"
+        android:label="SearchImageFragment" >
+        <argument
+            android:name="keyword"
+            app:argType="string"
+            app:nullable="false" />
+
         <action
-            android:id="@+id/action_registerFragment2_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_searchImageFragment_to_imageDetailFragment"
+            app:destination="@id/imageDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageDetailFragment"
+        tools:layout="@layout/fragment_search_image"
+        android:name="com.app.projectname.ui.preLogin.gallery.search.detail.ImageDetailFragment"
+        android:label="ImageDetailFragment" >
+
+                <argument
+                    android:name="galleryPhotoObject"
+                    app:argType="com.app.projectname.data.repository.photos.local.gallery.GalleryPhoto"
+                    app:nullable="true" />
     </fragment>
 </navigation>

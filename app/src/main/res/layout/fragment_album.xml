@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+        <ImageView
+            android:id="@+id/imgCars"
+            android:layout_margin="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@drawable/cars"
+            />
+
+        <ImageView
+            android:id="@+id/imgMovies"
+            android:layout_margin="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imgCars"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@drawable/landscape"
+            />
+
+
+        <ImageView
+            android:id="@+id/imgLandscape"
+            android:layout_margin="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imgCars"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@drawable/landscape"
+            />
+
+
+        <ImageView
+            android:id="@+id/imgPainting"
+            android:layout_margin="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imgLandscape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:background="@drawable/painting"
+            />
+
+
+        <com.app.projectname.ui.component.customTextView.CustomTextView
+            android:id="@+id/customTextView"
+            style="@style/TextViewStyle"
+            android:text="Landscape"
+            app:layout_constraintBottom_toBottomOf="@+id/imgMovies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgCars" />
+
+
+        <com.app.projectname.ui.component.customTextView.CustomTextView
+            android:id="@+id/customTextView2"
+            style="@style/TextViewStyle"
+            android:text="Cars"
+            app:layout_constraintBottom_toBottomOf="@+id/imgCars"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.app.projectname.ui.component.customTextView.CustomTextView
+            style="@style/TextViewStyle"
+            android:text="Painting"
+            app:layout_constraintTop_toTopOf="@+id/imgPainting"
+            app:layout_constraintBottom_toBottomOf="@+id/imgPainting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+</layout>

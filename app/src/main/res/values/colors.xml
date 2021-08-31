@@ -9,5 +9,15 @@
   <color name="tabTextColorUnSelected">#1A1818</color>
   <color name="LoginLayoutSuccessColor">@android:color/holo_green_light</color>
 
+  <color name="colorBg">#A32618</color>
+  <color name="colorWhite">#fff</color>
+  <color name="colorLightBlack">#13100D</color>
+
+  <color name="tab_indicator">#EBC03F</color>
+  <color name="events_tab_indicator_unselected">#33A3AEC2</color>
+  <color name="events_tab_text">#003865</color>
+  <color name="bgSearch">#ECF0F4</color>
+  <color name="searchview_hint">#747270</color>
+  <color name="load_state_progress">#130F0D</color>
 
 </resources>

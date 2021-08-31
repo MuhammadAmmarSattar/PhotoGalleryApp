@@ -3,12 +3,13 @@ package com.app.projectname.ui.preLogin.login.viewmodels
 import android.app.Application
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.app.projectname.ui.base.BaseViewModel
 import com.app.projectname.utils.AuthUtils.isEmailValid
-
-class LoginViewModel @ViewModelInject constructor(
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     application: Application
 ) : BaseViewModel(application) {
     var email: ObservableField<String> = ObservableField("")

@@ -3,7 +3,10 @@ package com.app.projectname.utils.event
 import android.content.Context
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import com.app.projectname.utils.ProgressDialog
+import com.app.projectname.utils.safeNavigateFromNavController
 import com.google.android.material.snackbar.Snackbar
 
 object EventUtilFunctions {
@@ -16,9 +19,13 @@ object EventUtilFunctions {
 
     fun showLoader(show: Boolean, customProgressDialog: ProgressDialog?) {
         if (show) {
-            customProgressDialog?.show()
+            customProgressDialog?.apply {
+                if (!isShowing) show()
+            }
         } else {
-            customProgressDialog?.hide()
+            customProgressDialog?.apply {
+                dismiss()
+            }
         }
     }
 
@@ -33,5 +40,9 @@ object EventUtilFunctions {
         }
         snackbar.show()
     }
+    fun navigateByDirections(fragment: Fragment, navDirections: NavDirections) {
+    fragment.safeNavigateFromNavController(navDirections)
+    }
+
 }
 

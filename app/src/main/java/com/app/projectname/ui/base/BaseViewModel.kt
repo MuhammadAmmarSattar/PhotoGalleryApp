@@ -12,9 +12,8 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     private val _uiEventsLiveData = MutableLiveData<Event<UiEvent>>()
     val uiEvents: LiveData<Event<UiEvent>> = _uiEventsLiveData
 
-
     fun showLoader(show: Boolean) {
-        _uiEventsLiveData.postValue(Event(UiEvent.ShowLoader(show)))
+        _uiEventsLiveData.value = (Event(UiEvent.ShowLoader(show)))
     }
 
     fun showAlert(title: String = "Alert", message: String) {
@@ -32,18 +31,18 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
 
     }
 
-    fun handleApiError(
-        failure: Result.Failure,
-        retry: (() -> Unit)? = null
-    ) {
-        when {
-            failure.isNetWorkError -> showSnackbar("Please check your connection", retry)
-            failure.errorCode == 400 -> showSnackbar("Content not found", retry)
-            else -> {
-                val error = failure.errorBody?.string().toString()
-                showSnackbar(error)
-            }
-        }
-
-    }
+//    fun handleApiError(
+//        failure: Result.Failure,
+//        retry: (() -> Unit)? = null
+//    ) {
+//        when {
+//            failure.isNetWorkError -> showSnackbar("Please check your connection", retry)
+//            failure.errorCode == 400 -> showSnackbar("Content not found", retry)
+//            else -> {
+//                val error = failure.errorBody?.string().toString()
+//                showSnackbar(error)
+//            }
+//        }
+//
+//    }
 }

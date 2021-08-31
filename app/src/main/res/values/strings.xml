@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BasicAppImpl</string>
+    <string name="app_name">My Gallery</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="switch_language">Switch Language</string>
@@ -15,6 +15,10 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Sign Up</string>
+    <string name="my_gallery">My Gallery</string>
 
+    <string name="album">Album</string>
+    <string name="favourite">favourite</string>
+    <string name="search">Search</string>
 
 </resources>

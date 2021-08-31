@@ -29,8 +29,8 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     }
 
     private suspend fun navigate() {
-        delay(1000)
-        findNavController(this).navigate(R.id.action_splashFragment_to_loginFragment)
+        delay(3000)
+        navigateByDirections(SplashFragmentDirections.actionSplashFragmentToGalleryFragment())
     }
 
 }

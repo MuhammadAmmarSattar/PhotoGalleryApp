@@ -1,9 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 //apply plugin: 'com.google.gms.google-services'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
 def config = rootProject.extensions.getByName("ext")
 
 
@@ -37,12 +40,14 @@ android {
             keyPassword "dj123456789"
         }
     }
+    //    https://pixabay.com/api/?key=23128582-ec2a8fcbc037558d593509a53&q=yellow+flowers&image_type=photo&pretty=true
+
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
             minifyEnabled false
             debuggable true
-            buildConfigField("String", "BASE_URL", "\"https://8bc1dd86-134b-4cba-8faf-1913c2adec08.mock.pstmn.io\"")
+            buildConfigField("String", "BASE_URL", "\" http://pixabay.com/\"")
             buildConfigField("Boolean", "IS_ENCRYPTION_ENABLED", "false")
             buildConfigField("Boolean", "IS_TSL_ENABLED", "false")
             buildConfigField("String", "DATA_STORE_NAME", "\"DATA_STORE_DEBUG\"")
@@ -150,9 +155,8 @@ dependencies {
     implementation config.commonDependency.activityKtx
     //Dagger - Hilt
     implementation config.di.hilt
-    implementation config.di.hiltLifeCycleVM
-    kapt config.di.hiltCompiler
     kapt config.di.hiltDagger
+
     // Timber
     implementation config.logs.timber
     //DataStore Preferences
@@ -174,9 +178,10 @@ dependencies {
     //paging3
     implementation config.paging3.pagingRuntime
     implementation config.paging3.pagingRuntimeKtx
+    //animation
+    implementation config.ui_design.androidAnimations
 
-
-
+    implementation config.ui_design.photoView
 
 
 }

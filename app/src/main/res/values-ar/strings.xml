@@ -4,6 +4,8 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="switch_language">تبديل اللغة</string>
+    <string name="my_gallery">My Gallery</string>
+    <string name="search">Search</string>
 
 </resources>
 
