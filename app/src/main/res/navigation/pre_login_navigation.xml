@@ -10,6 +10,8 @@
         tools:layout="@layout/fragment_splash"
         android:label="fragment_splash">
         <action
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             android:id="@+id/action_splashFragment_to_galleryFragment"
             app:destination="@id/galleryFragment" />
     </fragment>

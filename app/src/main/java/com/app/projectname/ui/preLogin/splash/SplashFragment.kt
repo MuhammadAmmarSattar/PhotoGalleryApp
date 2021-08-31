@@ -22,14 +22,13 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         lifecycleScope.launch {
             navigate()
         }
     }
 
     private suspend fun navigate() {
-        delay(3000)
+        delay(4000)
         navigateByDirections(SplashFragmentDirections.actionSplashFragmentToGalleryFragment())
     }
 
