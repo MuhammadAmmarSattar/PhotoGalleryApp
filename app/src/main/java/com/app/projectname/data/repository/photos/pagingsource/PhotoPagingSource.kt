@@ -31,9 +31,9 @@ class PhotoPagingSource(
                 page = pageIndex,
                 galleryPhotoRequest.per_page
             )
-            val movies = response.photoList
+            val photos = response.photoList
             val nextKey =
-                if (movies.isEmpty()) {
+                if (photos.isEmpty()) {
                     null
                 } else {
                     // By default, initial load size = 3 * NETWORK PAGE SIZE
