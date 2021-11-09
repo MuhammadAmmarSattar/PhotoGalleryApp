@@ -50,4 +50,14 @@ class AlbumFragment : BaseFragment<FragmentAlbumBinding>(),View.OnClickListener 
             }
         }
     }
+//    801->900
+//    99->100
+//    14->100
+//    452->500
+//    900->900
+
+    fun algo(var takeInput : Int){
+        //if the number is two digits than print 100
+        //
+    }
 }
